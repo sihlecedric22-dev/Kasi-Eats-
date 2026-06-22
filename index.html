@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -17,10 +17,6 @@ header {
     background: linear-gradient(90deg, #ff4d00, #ff9900);
     padding: 20px;
     text-align: center;
-}
-
-header h1 {
-    margin: 0;
 }
 
 .container {
@@ -66,8 +62,8 @@ header h1 {
     border-bottom: 1px solid #333;
 }
 
-.whatsapp-btn {
-    background: #25D366;
+/* BUTTONS */
+.btn {
     border: none;
     padding: 12px;
     width: 100%;
@@ -77,14 +73,19 @@ header h1 {
     cursor: pointer;
 }
 
+.whatsapp-btn {
+    background: #25D366;
+    color: white;
+}
+
+.location-btn {
+    background: #0088ff;
+    color: white;
+}
+
 .clear-btn {
     background: #ff4d4d;
-    border: none;
-    padding: 8px;
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 8px;
-    cursor: pointer;
+    color: white;
 }
 </style>
 </head>
@@ -122,16 +123,19 @@ header h1 {
 <!-- CART -->
 <div class="cart">
     <h3>🛒 Your Cart</h3>
-
     <div id="cartItems"></div>
 
     <h4>Total: R<span id="total">0</span></h4>
 
-    <button class="whatsapp-btn" onclick="checkoutWhatsApp()">
+    <button class="btn whatsapp-btn" onclick="checkoutWhatsApp()">
         Checkout on WhatsApp
     </button>
 
-    <button class="clear-btn" onclick="clearCart()">
+    <button class="btn location-btn" onclick="sendLocationWhatsApp()">
+        📍 Send My Live Location
+    </button>
+
+    <button class="btn clear-btn" onclick="clearCart()">
         Clear Cart
     </button>
 </div>
@@ -148,14 +152,14 @@ function addToCart(item, price) {
     renderCart();
 }
 
-// SHOW CART
+// RENDER CART
 function renderCart() {
     let cartDiv = document.getElementById("cartItems");
     let total = 0;
 
     cartDiv.innerHTML = "";
 
-    cart.forEach((c, index) => {
+    cart.forEach(c => {
         total += c.price;
 
         cartDiv.innerHTML += `
@@ -175,29 +179,58 @@ function clearCart() {
     renderCart();
 }
 
-// CHECKOUT VIA WHATSAPP
+// ORDER ID GENERATOR
+function generateOrderId() {
+    return "KE-" + Math.floor(100000 + Math.random() * 900000);
+}
+
+// CHECKOUT WHATSAPP
 function checkoutWhatsApp() {
     if (cart.length === 0) {
         alert("Your cart is empty!");
         return;
     }
 
+    let orderId = generateOrderId();
     let total = 0;
-    let message = "Hello, I want to order from Into Emnandi:%0A%0A";
+
+    let message =
+`🍔 Kasi Eats Order
+Order ID: ${orderId}
+
+`;
 
     cart.forEach(c => {
         message += `- ${c.item} (R${c.price})%0A`;
         total += c.price;
     });
 
-    message += `%0ATotal: R${total}%0A%0A`;
+    message += `%0A💰 Total: R${total}%0A`;
 
-    message += `📍 DELIVERY INFO:%0A`;
-    message += `Please send your LIVE LOCATION on WhatsApp after this message so we can deliver your order.%0A`;
-    message += `If you cannot send live location, type your address manually.`;
+    message += `%0A📍 DELIVERY INSTRUCTIONS:%0A`;
+    message += `Please send your LIVE LOCATION on WhatsApp so we can deliver your order.%0A`;
+    message += `Or type your address manually if needed.%0A`;
 
     let number = "+27774950915";
     let url = `https://wa.me/${number.replace('+','')}?text=${message}`;
+
+    window.open(url, "_blank");
+}
+
+// SEND LOCATION REQUEST
+function sendLocationWhatsApp() {
+    let message =
+`📍 Kasi Eats Location Request
+
+Please send your LIVE LOCATION using WhatsApp:
+👉 Tap attach (📎)
+👉 Select Location
+👉 Choose "Send Live Location"
+
+Or type your address manually.`;
+
+    let number = "+27774950915";
+    let url = `https://wa.me/${number.replace('+','')}?text=${encodeURIComponent(message)}`;
 
     window.open(url, "_blank");
 }
