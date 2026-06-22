@@ -78,11 +78,6 @@ header {
     color: white;
 }
 
-.location-btn {
-    background: #0088ff;
-    color: white;
-}
-
 .clear-btn {
     background: #ff4d4d;
     color: white;
@@ -123,16 +118,13 @@ header {
 <!-- CART -->
 <div class="cart">
     <h3>🛒 Your Cart</h3>
+
     <div id="cartItems"></div>
 
     <h4>Total: R<span id="total">0</span></h4>
 
     <button class="btn whatsapp-btn" onclick="checkoutWhatsApp()">
         Checkout on WhatsApp
-    </button>
-
-    <button class="btn location-btn" onclick="sendLocationWhatsApp()">
-        📍 Send My Live Location
     </button>
 
     <button class="btn clear-btn" onclick="clearCart()">
@@ -146,13 +138,13 @@ header {
 
 let cart = [];
 
-// ADD TO CART
+// ADD ITEM
 function addToCart(item, price) {
     cart.push({ item, price });
     renderCart();
 }
 
-// RENDER CART
+// SHOW CART
 function renderCart() {
     let cartDiv = document.getElementById("cartItems");
     let total = 0;
@@ -179,12 +171,12 @@ function clearCart() {
     renderCart();
 }
 
-// ORDER ID GENERATOR
+// ORDER ID
 function generateOrderId() {
     return "KE-" + Math.floor(100000 + Math.random() * 900000);
 }
 
-// CHECKOUT WHATSAPP
+// CHECKOUT (FIXED CLEAN FORMAT)
 function checkoutWhatsApp() {
     if (cart.length === 0) {
         alert("Your cart is empty!");
@@ -201,36 +193,21 @@ Order ID: ${orderId}
 `;
 
     cart.forEach(c => {
-        message += `- ${c.item} (R${c.price})%0A`;
+        message += `- ${c.item} (R${c.price})\n`;
         total += c.price;
     });
 
-    message += `%0A💰 Total: R${total}%0A`;
-
-    message += `%0A📍 DELIVERY INSTRUCTIONS:%0A`;
-    message += `Please send your LIVE LOCATION on WhatsApp so we can deliver your order.%0A`;
-    message += `Or type your address manually if needed.%0A`;
+    message += `\nAddress: Send live location or type your address\n`;
+    message += `Total: R${total}\n`;
+    message += `Order ID: ${orderId}`;
 
     let number = "+27774950915";
-    let url = `https://wa.me/${number.replace('+','')}?text=${message}`;
 
-    window.open(url, "_blank");
-}
-
-// SEND LOCATION REQUEST
-function sendLocationWhatsApp() {
-    let message =
-`📍 Kasi Eats Location Request
-
-Please send your LIVE LOCATION using WhatsApp:
-👉 Tap attach (📎)
-👉 Select Location
-👉 Choose "Send Live Location"
-
-Or type your address manually.`;
-
-    let number = "+27774950915";
-    let url = `https://wa.me/${number.replace('+','')}?text=${encodeURIComponent(message)}`;
+    let url =
+        "https://wa.me/" +
+        number.replace("+", "") +
+        "?text=" +
+        encodeURIComponent(message);
 
     window.open(url, "_blank");
 }
