@@ -3,151 +3,205 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Kasi Eats - Local Food Marketplace</title>
+<title>Kasi Eats - Into Emnandi</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #111;
-        color: white;
-    }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+}
 
-    header {
-        background: linear-gradient(90deg, #ff4d00, #ff9900);
-        padding: 20px;
-        text-align: center;
-    }
+header {
+    background: linear-gradient(90deg, #ff4d00, #ff9900);
+    padding: 20px;
+    text-align: center;
+}
 
-    header h1 {
-        margin: 0;
-        font-size: 28px;
-    }
+header h1 {
+    margin: 0;
+}
 
-    header p {
-        margin: 5px 0 0;
-        font-size: 14px;
-    }
+.container {
+    padding: 15px;
+}
 
-    .container {
-        padding: 15px;
-    }
+/* MENU */
+.menu-item {
+    background: #2a2a2a;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    .search {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0 20px;
-        border-radius: 8px;
-        border: none;
-    }
+.menu-item button {
+    background: #25D366;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-    .store {
-        background: #1c1c1c;
-        margin-bottom: 15px;
-        padding: 15px;
-        border-radius: 12px;
-    }
+/* CART */
+.cart {
+    background: #1c1c1c;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
 
-    .store h2 {
-        margin: 0 0 10px;
-    }
+.cart h3 {
+    margin-top: 0;
+}
 
-    .menu-item {
-        background: #2a2a2a;
-        padding: 8px;
-        margin: 5px 0;
-        border-radius: 8px;
-        display: flex;
-        justify-content: space-between;
-    }
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #333;
+}
 
-    .btn {
-        background: #25D366;
-        color: white;
-        border: none;
-        padding: 10px;
-        width: 100%;
-        margin-top: 10px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-    }
+.whatsapp-btn {
+    background: #25D366;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-    .btn:hover {
-        opacity: 0.9;
-    }
+.clear-btn {
+    background: #ff4d4d;
+    border: none;
+    padding: 8px;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>🍔 Kasi Eats</h1>
-    <p>Your Local Food Marketplace – Order via WhatsApp</p>
+    <h1>🍔 Into Emnandi</h1>
+    <p>Order your favourite Kasi meals</p>
 </header>
 
 <div class="container">
 
-<input class="search" placeholder="Search stores..." id="searchBox" onkeyup="filterStores()"/>
-
-<!-- STORE 1 -->
-<div class="store">
-    <h2>🔥 Into Emnandi</h2>
-
-    <div class="menu-item"><span>Beef Burger</span><span>R45</span></div>
-    <div class="menu-item"><span>Chicken Wrap</span><span>R40</span></div>
-    <div class="menu-item"><span>Kota Special</span><span>R35</span></div>
-    <div class="menu-item"><span>Chips & Russian</span><span>R30</span></div>
-
-    <button class="btn" onclick="order('Into Emnandi', '+27000000000')">
-        Order on WhatsApp
-    </button>
+<!-- MENU -->
+<div class="menu-item">
+    <span>Beef Burger - R45</span>
+    <button onclick="addToCart('Beef Burger', 45)">Add</button>
 </div>
 
-<!-- STORE 2 -->
-<div class="store">
-    <h2>🍗 Kasi Chicken Spot</h2>
-
-    <div class="menu-item"><span>2pc Chicken & Chips</span><span>R50</span></div>
-    <div class="menu-item"><span>Wings Meal</span><span>R55</span></div>
-    <div class="menu-item"><span>Family Bucket</span><span>R120</span></div>
-
-    <button class="btn" onclick="order('Kasi Chicken Spot', '+27000000000')">
-        Order on WhatsApp
-    </button>
+<div class="menu-item">
+    <span>Chicken Wrap - R40</span>
+    <button onclick="addToCart('Chicken Wrap', 40)">Add</button>
 </div>
 
-<!-- STORE 3 -->
-<div class="store">
-    <h2>🥤 Fresh Drinks Hub</h2>
+<div class="menu-item">
+    <span>Kota Special - R35</span>
+    <button onclick="addToCart('Kota Special', 35)">Add</button>
+</div>
 
-    <div class="menu-item"><span>1L Coke</span><span>R25</span></div>
-    <div class="menu-item"><span>Milkshake</span><span>R30</span></div>
-    <div class="menu-item"><span>Energy Drink</span><span>R20</span></div>
+<div class="menu-item">
+    <span>Chips & Russian - R30</span>
+    <button onclick="addToCart('Chips & Russian', 30)">Add</button>
+</div>
 
-    <button class="btn" onclick="order('Fresh Drinks Hub', '+27000000000')">
-        Order on WhatsApp
+<!-- CART -->
+<div class="cart">
+    <h3>🛒 Your Cart</h3>
+
+    <div id="cartItems"></div>
+
+    <h4>Total: R<span id="total">0</span></h4>
+
+    <button class="whatsapp-btn" onclick="checkoutWhatsApp()">
+        Checkout on WhatsApp
+    </button>
+
+    <button class="clear-btn" onclick="clearCart()">
+        Clear Cart
     </button>
 </div>
 
 </div>
 
 <script>
-function order(storeName, number) {
-    let message = `Hello, I want to order from ${storeName}.`;
-    let url = `https://wa.me/${number.replace('+','')}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
+
+let cart = [];
+
+// ADD TO CART
+function addToCart(item, price) {
+    cart.push({ item, price });
+    renderCart();
 }
 
-function filterStores() {
-    let input = document.getElementById("searchBox").value.toLowerCase();
-    let stores = document.getElementsByClassName("store");
+// SHOW CART
+function renderCart() {
+    let cartDiv = document.getElementById("cartItems");
+    let total = 0;
 
-    for (let i = 0; i < stores.length; i++) {
-        let name = stores[i].getElementsByTagName("h2")[0].innerText.toLowerCase();
-        stores[i].style.display = name.includes(input) ? "" : "none";
+    cartDiv.innerHTML = "";
+
+    cart.forEach((c, index) => {
+        total += c.price;
+
+        cartDiv.innerHTML += `
+        <div class="cart-item">
+            <span>${c.item}</span>
+            <span>R${c.price}</span>
+        </div>
+        `;
+    });
+
+    document.getElementById("total").innerText = total;
+}
+
+// CLEAR CART
+function clearCart() {
+    cart = [];
+    renderCart();
+}
+
+// CHECKOUT VIA WHATSAPP
+function checkoutWhatsApp() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
     }
+
+    let total = 0;
+    let message = "Hello, I want to order from Into Emnandi:%0A%0A";
+
+    cart.forEach(c => {
+        message += `- ${c.item} (R${c.price})%0A`;
+        total += c.price;
+    });
+
+    message += `%0ATotal: R${total}%0A%0A`;
+
+    message += `📍 DELIVERY INFO:%0A`;
+    message += `Please send your LIVE LOCATION on WhatsApp after this message so we can deliver your order.%0A`;
+    message += `If you cannot send live location, type your address manually.`;
+
+    let number = "+27774950915";
+    let url = `https://wa.me/${number.replace('+','')}?text=${message}`;
+
+    window.open(url, "_blank");
 }
+
 </script>
 
 </body>
