@@ -5,18 +5,28 @@
 
   <style>
     body {
-      font-family: Arial;
       margin: 0;
-      background: #f5f5f5;
+      font-family: Arial;
+      background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    /* dark overlay so text is readable */
+    .overlay {
+      background: rgba(0,0,0,0.6);
+      min-height: 100vh;
+      padding-bottom: 120px;
     }
 
     .header {
-      background: #ff3b3b;
       color: white;
       padding: 20px;
       text-align: center;
       font-size: 24px;
       font-weight: bold;
+      animation: fadeIn 0.8s ease-in;
     }
 
     .container {
@@ -24,11 +34,17 @@
     }
 
     .card {
-      background: white;
+      background: rgba(255,255,255,0.95);
       padding: 15px;
       margin-bottom: 15px;
       border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+      animation: slideUp 0.5s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
     }
 
     .btn {
@@ -49,7 +65,7 @@
       right: 0;
       background: white;
       padding: 15px;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
     }
 
     input {
@@ -59,127 +75,120 @@
       border-radius: 5px;
       border: 1px solid #ccc;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
   </style>
 </head>
 
 <body>
 
-  <div class="header">
-    🍔 Kasi Eats
-  </div>
+<div class="overlay">
+
+  <div class="header">🍔 Kasi Eats</div>
 
   <div class="container">
 
     <div class="card">
       <h3>Burger Combo</h3>
       <p>R45</p>
-      <button class="btn" onclick="addItem('Burger Combo', 45)">Add to Cart</button>
+      <button class="btn" onclick="add('Burger Combo',45)">Add</button>
     </div>
 
     <div class="card">
       <h3>Chicken Meal</h3>
       <p>R55</p>
-      <button class="btn" onclick="addItem('Chicken Meal', 55)">Add to Cart</button>
+      <button class="btn" onclick="add('Chicken Meal',55)">Add</button>
     </div>
 
     <div class="card">
       <h3>Chicken Wrap</h3>
       <p>R40</p>
-      <button class="btn" onclick="addItem('Chicken Wrap', 40)">Add to Cart</button>
+      <button class="btn" onclick="add('Chicken Wrap',40)">Add</button>
     </div>
 
     <div class="card">
       <h3>Kota</h3>
       <p>R35</p>
-      <button class="btn" onclick="addItem('Kota', 35)">Add to Cart</button>
+      <button class="btn" onclick="add('Kota',35)">Add</button>
     </div>
 
   </div>
 
-  <!-- CART -->
-  <div class="cart">
+</div>
 
-    <p id="cartText">Cart: Empty</p>
+<!-- CART -->
+<div class="cart">
 
-    <input type="text" id="address" placeholder="Enter delivery address">
+  <p id="cartText">Cart: Empty</p>
 
-    <button class="btn" onclick="checkout()">Checkout on WhatsApp</button>
+  <input id="address" placeholder="Delivery address">
 
-  </div>
+  <button class="btn" onclick="checkout()">Checkout WhatsApp</button>
 
-  <script>
-    let cart = [];
+</div>
 
-    function addItem(name, price) {
-      cart.push({ name, price });
-      updateCart();
-    }
+<script>
+let cart = [];
 
-    function updateCart() {
-      if (cart.length === 0) {
-        document.getElementById("cartText").innerText = "Cart: Empty";
-        return;
-      }
+function add(name, price){
+  cart.push({name, price});
+  update();
+}
 
-      let total = 0;
-      let text = "Cart: ";
+function update(){
+  let total = 0;
+  let text = "Cart: ";
 
-      cart.forEach(item => {
-        text += item.name + ", ";
-        total += item.price;
-      });
+  cart.forEach(i=>{
+    text += i.name + ", ";
+    total += i.price;
+  });
 
-      text += " | Total: R" + total;
+  text += " | R" + total;
 
-      document.getElementById("cartText").innerText = text;
-    }
+  document.getElementById("cartText").innerText = text;
+}
 
-    function generateOrderID() {
-      return "KE-" + Math.floor(Math.random() * 1000000);
-    }
+function orderID(){
+  return "KE-" + Math.floor(Math.random()*999999);
+}
 
-    function checkout() {
-      if (cart.length === 0) {
-        alert("Cart is empty!");
-        return;
-      }
+function checkout(){
+  if(cart.length === 0) return alert("Cart empty");
 
-      let address = document.getElementById("address").value;
+  let address = document.getElementById("address").value;
+  if(!address) return alert("Enter address");
 
-      if (address === "") {
-        alert("Please enter delivery address");
-        return;
-      }
+  const phone = "27774950915";
+  let id = orderID();
 
-      const phoneNumber = "27774950915";
+  let msg = "🍔 Kasi Eats Order%0AID: " + id + "%0A%0A";
 
-      let orderID = generateOrderID();
+  let total = 0;
 
-      let message = "🍔 Kasi Eats Order%0A";
-      message += "Order ID: " + orderID + "%0A%0A";
+  cart.forEach(i=>{
+    msg += "- " + i.name + " (R" + i.price + ")%0A";
+    total += i.price;
+  });
 
-      let total = 0;
+  msg += "%0AAddress: " + address;
+  msg += "%0ATotal: R" + total;
 
-      cart.forEach(item => {
-        message += "- " + item.name + " (R" + item.price + ")%0A";
-        total += item.price;
-      });
+  window.open("https://wa.me/" + phone + "?text=" + msg, "_blank");
 
-      message += "%0AAddress: " + address;
-      message += "%0ATotal: R" + total;
-      message += "%0AOrder ID: " + orderID;
-
-      const url =
-        "https://wa.me/" + phoneNumber + "?text=" + message;
-
-      window.open(url, "_blank");
-
-      // reset cart after order
-      cart = [];
-      updateCart();
-      document.getElementById("address").value = "";
-    }
-  </script>
+  cart = [];
+  update();
+  document.getElementById("address").value = "";
+}
+</script>
 
 </body>
 </html>
