@@ -2,16 +2,7 @@
 <html>
 <head>
   <title>Kasi Eats</title>
-</head>
-<body>
-  <h1>Welcome to Kasi Eats 🍔</h1>
-  <p>Your food delivery app is working!</p>
-</body>
-</html> 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Kasi Eats</title>
+
   <style>
     body {
       font-family: Arial;
@@ -41,13 +32,32 @@
     }
 
     .btn {
-      background: #ff3b3b;
+      background: #25D366;
       color: white;
       padding: 10px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      width: 100%;
       margin-top: 10px;
+    }
+
+    .cart {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 15px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
   </style>
 </head>
@@ -61,25 +71,115 @@
   <div class="container">
 
     <div class="card">
-      <h3> order Burger Combo</h3>
-      <p>Juicy burger + fries + drink</p>
-      <button class="btn">Order Now</button>
+      <h3>Burger Combo</h3>
+      <p>R45</p>
+      <button class="btn" onclick="addItem('Burger Combo', 45)">Add to Cart</button>
     </div>
 
     <div class="card">
       <h3>Chicken Meal</h3>
-      <p>Fried chicken with chips</p>
-      <button class="btn">Order Now</button>
+      <p>R55</p>
+      <button class="btn" onclick="addItem('Chicken Meal', 55)">Add to Cart</button>
     </div>
 
     <div class="card">
-      <h3>Pizza Slice</h3>
-      <p>Cheesy pepperoni pizza</p>
-      <button class="btn">Order Now</button>
+      <h3>Chicken Wrap</h3>
+      <p>R40</p>
+      <button class="btn" onclick="addItem('Chicken Wrap', 40)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <h3>Kota</h3>
+      <p>R35</p>
+      <button class="btn" onclick="addItem('Kota', 35)">Add to Cart</button>
     </div>
 
   </div>
 
+  <!-- CART -->
+  <div class="cart">
+
+    <p id="cartText">Cart: Empty</p>
+
+    <input type="text" id="address" placeholder="Enter delivery address">
+
+    <button class="btn" onclick="checkout()">Checkout on WhatsApp</button>
+
+  </div>
+
+  <script>
+    let cart = [];
+
+    function addItem(name, price) {
+      cart.push({ name, price });
+      updateCart();
+    }
+
+    function updateCart() {
+      if (cart.length === 0) {
+        document.getElementById("cartText").innerText = "Cart: Empty";
+        return;
+      }
+
+      let total = 0;
+      let text = "Cart: ";
+
+      cart.forEach(item => {
+        text += item.name + ", ";
+        total += item.price;
+      });
+
+      text += " | Total: R" + total;
+
+      document.getElementById("cartText").innerText = text;
+    }
+
+    function generateOrderID() {
+      return "KE-" + Math.floor(Math.random() * 1000000);
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Cart is empty!");
+        return;
+      }
+
+      let address = document.getElementById("address").value;
+
+      if (address === "") {
+        alert("Please enter delivery address");
+        return;
+      }
+
+      const phoneNumber = "27774950915";
+
+      let orderID = generateOrderID();
+
+      let message = "🍔 Kasi Eats Order%0A";
+      message += "Order ID: " + orderID + "%0A%0A";
+
+      let total = 0;
+
+      cart.forEach(item => {
+        message += "- " + item.name + " (R" + item.price + ")%0A";
+        total += item.price;
+      });
+
+      message += "%0AAddress: " + address;
+      message += "%0ATotal: R" + total;
+      message += "%0AOrder ID: " + orderID;
+
+      const url =
+        "https://wa.me/" + phoneNumber + "?text=" + message;
+
+      window.open(url, "_blank");
+
+      // reset cart after order
+      cart = [];
+      updateCart();
+      document.getElementById("address").value = "";
+    }
+  </script>
+
 </body>
 </html>
-<button class="btn" onclick="order('Burger Combo')">Order Now</button>
