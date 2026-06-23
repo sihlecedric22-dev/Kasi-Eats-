@@ -1,215 +1,332 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Kasi Eats - Into Emnandi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Into Emnandi Catering</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: white;
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#111;
+color:white;
 }
 
-header {
-    background: linear-gradient(90deg, #ff4d00, #ff9900);
-    padding: 20px;
-    text-align: center;
+.header{
+background:#ff9800;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+position:sticky;
+top:0;
 }
 
-.container {
-    padding: 15px;
+.container{
+padding:15px;
+padding-bottom:250px;
 }
 
-/* MENU */
-.menu-item {
-    background: #2a2a2a;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.card{
+background:white;
+color:black;
+padding:15px;
+margin-bottom:12px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.3);
 }
 
-.menu-item button {
-    background: #25D366;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
+.card h3{
+margin:0;
 }
 
-/* CART */
-.cart {
-    background: #1c1c1c;
-    padding: 15px;
-    border-radius: 12px;
-    margin-top: 20px;
+.btn{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:none;
+border-radius:5px;
+background:#25D366;
+color:white;
+font-weight:bold;
+cursor:pointer;
 }
 
-.cart h3 {
-    margin-top: 0;
+.cart{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:white;
+padding:15px;
+box-shadow:0 -2px 10px rgba(0,0,0,.4);
+color:black;
 }
 
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
-    border-bottom: 1px solid #333;
+input{
+width:100%;
+padding:10px;
+margin-top:8px;
+margin-bottom:8px;
+box-sizing:border-box;
 }
 
-/* BUTTONS */
-.btn {
-    border: none;
-    padding: 12px;
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
+.removeBtn{
+background:#f44336;
 }
 
-.whatsapp-btn {
-    background: #25D366;
-    color: white;
-}
-
-.clear-btn {
-    background: #ff4d4d;
-    color: white;
+.clearBtn{
+background:#555;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>🍔 Into Emnandi</h1>
-    <p>Order your favourite Kasi meals</p>
-</header>
+<div class="header">
+🔥 Into Emnandi Catering
+</div>
 
 <div class="container">
 
-<!-- MENU -->
-<div class="menu-item">
-    <span>Beef Burger - R45</span>
-    <button onclick="addToCart('Beef Burger', 45)">Add</button>
+<h2>Main Meals</h2>
+
+<div class="card">
+<h3>Pap & Creamy Samp Chicken</h3>
+<p>R60</p>
+<button class="btn" onclick="add('Pap & Creamy Samp Chicken',60)">Add</button>
 </div>
 
-<div class="menu-item">
-    <span>Chicken Wrap - R40</span>
-    <button onclick="addToCart('Chicken Wrap', 40)">Add</button>
+<div class="card">
+<h3>Grilled Chicken</h3>
+<p>R50</p>
+<button class="btn" onclick="add('Grilled Chicken',50)">Add</button>
 </div>
 
-<div class="menu-item">
-    <span>Kota Special - R35</span>
-    <button onclick="addToCart('Kota Special', 35)">Add</button>
+<div class="card">
+<h3>Wings + Chips + Salad</h3>
+<p>R65</p>
+<button class="btn" onclick="add('Wings + Chips + Salad',65)">Add</button>
 </div>
 
-<div class="menu-item">
-    <span>Chips & Russian - R30</span>
-    <button onclick="addToCart('Chips & Russian', 30)">Add</button>
+<div class="card">
+<h3>Chicken Wrap + Wings + Chips</h3>
+<p>R45</p>
+<button class="btn" onclick="add('Chicken Wrap + Wings + Chips',45)">Add</button>
 </div>
 
-<!-- CART -->
+<h2>Kota Menu</h2>
+
+<div class="card">
+<h3>Kota R15</h3>
+<p>Achar, Polony, Chips</p>
+<button class="btn" onclick="add('Kota R15',15)">Add</button>
+</div>
+
+<div class="card">
+<h3>Kota R20</h3>
+<p>Achar, Polony, Vienna, Chips</p>
+<button class="btn" onclick="add('Kota R20',20)">Add</button>
+</div>
+
+<div class="card">
+<h3>Kota R25</h3>
+<p>Achar, Polony, Vienna, Egg, Chips</p>
+<button class="btn" onclick="add('Kota R25',25)">Add</button>
+</div>
+
+<div class="card">
+<h3>Kota R30</h3>
+<p>Achar, Polony, Vienna, Egg, Cheese, Chips</p>
+<button class="btn" onclick="add('Kota R30',30)">Add</button>
+</div>
+
+<div class="card">
+<h3>Kota R35</h3>
+<p>Egg, Cheese, Russian, Burger</p>
+<button class="btn" onclick="add('Kota R35',35)">Add</button>
+</div>
+
+<div class="card">
+<h3>Kota R40</h3>
+<p>Full Vienna, Egg, Cheese, Russian, Burger</p>
+<button class="btn" onclick="add('Kota R40',40)">Add</button>
+</div>
+
+<div class="card">
+<h3>Kota R50</h3>
+<p>Full Vienna, Egg, Cheese, Full Russian, Burger</p>
+<button class="btn" onclick="add('Kota R50',50)">Add</button>
+</div>
+
+<div class="card">
+<h3>Kota R60</h3>
+<p>Full Vienna, Egg, Cheese, Full Russian, Full Burger</p>
+<button class="btn" onclick="add('Kota R60',60)">Add</button>
+</div>
+
+<div class="card">
+<h3>Kota Combo + Mocktail</h3>
+<p>R80</p>
+<button class="btn" onclick="add('Kota Combo + Mocktail',80)">Add</button>
+</div>
+
+<div class="card">
+<h3>Kota Combo + Wings + Mocktail</h3>
+<p>R100</p>
+<button class="btn" onclick="add('Kota Combo + Wings + Mocktail',100)">Add</button>
+</div>
+
+<h2>Traditional Meals</h2>
+
+<div class="card">
+<h3>Mogodu Meal</h3>
+<p>R60</p>
+<button class="btn" onclick="add('Mogodu Meal',60)">Add</button>
+</div>
+
+<div class="card">
+<h3>Pork Trotters Meal</h3>
+<p>R60</p>
+<button class="btn" onclick="add('Pork Trotters Meal',60)">Add</button>
+</div>
+
+<div class="card">
+<h3>Chicken Traditional Meal</h3>
+<p>R60</p>
+<button class="btn" onclick="add('Chicken Traditional Meal',60)">Add</button>
+</div>
+
+<div class="card">
+<h3>Beef Stew Meal</h3>
+<p>R60</p>
+<button class="btn" onclick="add('Beef Stew Meal',60)">Add</button>
+</div>
+
+<div class="card">
+<h3>Wors Meal</h3>
+<p>R60</p>
+<button class="btn" onclick="add('Wors Meal',60)">Add</button>
+</div>
+
+<div class="card">
+<h3>Meatballs Meal</h3>
+<p>R60</p>
+<button class="btn" onclick="add('Meatballs Meal',60)">Add</button>
+</div>
+
+</div>
+
 <div class="cart">
-    <h3>🛒 Your Cart</h3>
 
-    <div id="cartItems"></div>
+<p id="cartText">Cart Empty</p>
 
-    <h4>Total: R<span id="total">0</span></h4>
+<input id="customer" placeholder="Customer Name">
 
-    <button class="btn whatsapp-btn" onclick="checkoutWhatsApp()">
-        Checkout on WhatsApp
-    </button>
+<input id="address" placeholder="Delivery Address">
 
-    <button class="btn clear-btn" onclick="clearCart()">
-        Clear Cart
-    </button>
-</div>
+<button class="btn removeBtn" onclick="removeLast()">
+Remove Last Item
+</button>
+
+<button class="btn clearBtn" onclick="clearCart()">
+Clear Cart
+</button>
+
+<button class="btn" onclick="checkout()">
+Checkout WhatsApp
+</button>
 
 </div>
 
 <script>
 
-let cart = [];
+let cart=[];
 
-// ADD ITEM
-function addToCart(item, price) {
-    cart.push({ item, price });
-    renderCart();
+function add(name,price){
+cart.push({name,price});
+update();
 }
 
-// SHOW CART
-function renderCart() {
-    let cartDiv = document.getElementById("cartItems");
-    let total = 0;
+function update(){
 
-    cartDiv.innerHTML = "";
+let total=0;
+let text="Cart: ";
 
-    cart.forEach(c => {
-        total += c.price;
+cart.forEach(item=>{
+text+=item.name+", ";
+total+=item.price;
+});
 
-        cartDiv.innerHTML += `
-        <div class="cart-item">
-            <span>${c.item}</span>
-            <span>R${c.price}</span>
-        </div>
-        `;
-    });
-
-    document.getElementById("total").innerText = total;
+if(cart.length===0){
+text="Cart Empty";
+}else{
+text+=" | Total: R"+total;
 }
 
-// CLEAR CART
-function clearCart() {
-    cart = [];
-    renderCart();
+document.getElementById("cartText").innerText=text;
 }
 
-// ORDER ID
-function generateOrderId() {
-    return "KE-" + Math.floor(100000 + Math.random() * 900000);
+function removeLast(){
+cart.pop();
+update();
 }
 
-// CHECKOUT (FIXED CLEAN FORMAT)
-function checkoutWhatsApp() {
-    if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-    }
+function clearCart(){
+cart=[];
+update();
+}
 
-    let orderId = generateOrderId();
-    let total = 0;
+function orderID(){
+return "IE-"+Math.floor(Math.random()*999999);
+}
 
-    let message =
-`🍔 Kasi Eats Order
-Order ID: ${orderId}
+function checkout(){
 
-`;
+if(cart.length===0){
+alert("Cart Empty");
+return;
+}
 
-    cart.forEach(c => {
-        message += `- ${c.item} (R${c.price})\n`;
-        total += c.price;
-    });
+let customer=document.getElementById("customer").value;
+let address=document.getElementById("address").value;
 
-    message += `\nAddress: Send live location or type your address\n`;
-    message += `Total: R${total}\n`;
-    message += `Order ID: ${orderId}`;
+if(customer===""){
+alert("Enter customer name");
+return;
+}
 
-    let number = "+27774950915";
+if(address===""){
+alert("Enter delivery address");
+return;
+}
 
-    let url =
-        "https://wa.me/" +
-        number.replace("+", "") +
-        "?text=" +
-        encodeURIComponent(message);
+let total=0;
 
-    window.open(url, "_blank");
+let msg="🔥 INTO EMNANDI CATERING ORDER%0A%0A";
+
+msg+="Order ID: "+orderID()+"%0A";
+msg+="Customer: "+customer+"%0A%0A";
+
+msg+="Items:%0A";
+
+cart.forEach(item=>{
+msg+="- "+item.name+" (R"+item.price+")%0A";
+total+=item.price;
+});
+
+msg+="%0AAddress:%0A"+address+"%0A";
+msg+="%0ATotal: R"+total;
+
+const phone="27774950915";
+
+window.open(
+"https://wa.me/"+phone+"?text="+msg,
+"_blank"
+);
+
 }
 
 </script>
