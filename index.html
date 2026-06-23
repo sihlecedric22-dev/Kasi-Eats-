@@ -4,329 +4,265 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Into Emnandi Catering</title>
+<title>Kasi Eats</title>
 
 <style>
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#111;
-color:white;
+  margin:0;
+  font-family:Arial;
+  background:#111;
+  color:white;
 }
 
 .header{
-background:#ff9800;
-padding:20px;
-text-align:center;
-font-size:28px;
-font-weight:bold;
-position:sticky;
-top:0;
+  background:#ff9800;
+  padding:18px;
+  text-align:center;
+  font-size:26px;
+  font-weight:bold;
+  position:sticky;
+  top:0;
 }
 
 .container{
-padding:15px;
-padding-bottom:250px;
+  padding:12px;
+  padding-bottom:260px;
+}
+
+h2{
+  color:#ff9800;
+}
+
+/* GRID MENU */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:12px;
 }
 
 .card{
-background:white;
-color:black;
-padding:15px;
-margin-bottom:12px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.3);
+  background:white;
+  color:black;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,0.3);
 }
 
-.card h3{
-margin:0;
+.card img{
+  width:100%;
+  height:100px;
+  object-fit:cover;
+}
+
+.card-body{
+  padding:10px;
+}
+
+.price{
+  font-weight:bold;
+  margin:5px 0;
 }
 
 .btn{
-width:100%;
-padding:10px;
-margin-top:10px;
-border:none;
-border-radius:5px;
-background:#25D366;
-color:white;
-font-weight:bold;
-cursor:pointer;
+  width:100%;
+  padding:8px;
+  border:none;
+  border-radius:5px;
+  background:#25D366;
+  color:white;
+  font-weight:bold;
 }
 
 .cart{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:white;
-padding:15px;
-box-shadow:0 -2px 10px rgba(0,0,0,.4);
-color:black;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  color:black;
+  padding:12px;
+  box-shadow:0 -2px 10px rgba(0,0,0,.4);
 }
 
-input{
-width:100%;
-padding:10px;
-margin-top:8px;
-margin-bottom:8px;
-box-sizing:border-box;
+#cartText{
+  white-space:pre-line;
 }
 
-.removeBtn{
-background:#f44336;
+.cart button{
+  margin-top:6px;
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:5px;
+  font-weight:bold;
 }
 
-.clearBtn{
-background:#555;
-}
+.removeBtn{ background:#f44336; color:white; }
+.clearBtn{ background:#555; color:white; }
+.checkoutBtn{ background:#25D366; color:white; }
+.locBtn{ background:#2196F3; color:white; }
 </style>
+
 </head>
 
 <body>
 
-<div class="header">
-🔥 Into Emnandi Catering
-</div>
+<div class="header">🍔 Kasi Eats</div>
 
 <div class="container">
 
-<h2>Main Meals</h2>
+<h2>Menu</h2>
 
+<div class="grid">
+
+<!-- ITEM 1 -->
 <div class="card">
-<h3>Pap & Creamy Samp Chicken</h3>
-<p>R60</p>
-<button class="btn" onclick="add('Pap & Creamy Samp Chicken',60)">Add</button>
+<img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086">
+<div class="card-body">
+<h3>Beef Burger</h3>
+<p class="price">R45</p>
+<button class="btn" onclick="add('Beef Burger',45)">Add</button>
+</div>
 </div>
 
+<!-- ITEM 2 -->
 <div class="card">
-<h3>Grilled Chicken</h3>
-<p>R50</p>
-<button class="btn" onclick="add('Grilled Chicken',50)">Add</button>
+<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+<div class="card-body">
+<h3>Chicken Wrap</h3>
+<p class="price">R40</p>
+<button class="btn" onclick="add('Chicken Wrap',40)">Add</button>
+</div>
 </div>
 
+<!-- ITEM 3 -->
 <div class="card">
-<h3>Wings + Chips + Salad</h3>
-<p>R65</p>
-<button class="btn" onclick="add('Wings + Chips + Salad',65)">Add</button>
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+<div class="card-body">
+<h3>Kota Special</h3>
+<p class="price">R35</p>
+<button class="btn" onclick="add('Kota Special',35)">Add</button>
+</div>
 </div>
 
+<!-- ITEM 4 -->
 <div class="card">
-<h3>Chicken Wrap + Wings + Chips</h3>
-<p>R45</p>
-<button class="btn" onclick="add('Chicken Wrap + Wings + Chips',45)">Add</button>
+<img src="https://images.unsplash.com/photo-1606757389667-9c4b1a4d2f3b">
+<div class="card-body">
+<h3>Chips & Russian</h3>
+<p class="price">R30</p>
+<button class="btn" onclick="add('Chips & Russian',30)">Add</button>
 </div>
-
-<h2>Kota Menu</h2>
-
-<div class="card">
-<h3>Kota R15</h3>
-<p>Achar, Polony, Chips</p>
-<button class="btn" onclick="add('Kota R15',15)">Add</button>
-</div>
-
-<div class="card">
-<h3>Kota R20</h3>
-<p>Achar, Polony, Vienna, Chips</p>
-<button class="btn" onclick="add('Kota R20',20)">Add</button>
-</div>
-
-<div class="card">
-<h3>Kota R25</h3>
-<p>Achar, Polony, Vienna, Egg, Chips</p>
-<button class="btn" onclick="add('Kota R25',25)">Add</button>
-</div>
-
-<div class="card">
-<h3>Kota R30</h3>
-<p>Achar, Polony, Vienna, Egg, Cheese, Chips</p>
-<button class="btn" onclick="add('Kota R30',30)">Add</button>
-</div>
-
-<div class="card">
-<h3>Kota R35</h3>
-<p>Egg, Cheese, Russian, Burger</p>
-<button class="btn" onclick="add('Kota R35',35)">Add</button>
-</div>
-
-<div class="card">
-<h3>Kota R40</h3>
-<p>Full Vienna, Egg, Cheese, Russian, Burger</p>
-<button class="btn" onclick="add('Kota R40',40)">Add</button>
-</div>
-
-<div class="card">
-<h3>Kota R50</h3>
-<p>Full Vienna, Egg, Cheese, Full Russian, Burger</p>
-<button class="btn" onclick="add('Kota R50',50)">Add</button>
-</div>
-
-<div class="card">
-<h3>Kota R60</h3>
-<p>Full Vienna, Egg, Cheese, Full Russian, Full Burger</p>
-<button class="btn" onclick="add('Kota R60',60)">Add</button>
-</div>
-
-<div class="card">
-<h3>Kota Combo + Mocktail</h3>
-<p>R80</p>
-<button class="btn" onclick="add('Kota Combo + Mocktail',80)">Add</button>
-</div>
-
-<div class="card">
-<h3>Kota Combo + Wings + Mocktail</h3>
-<p>R100</p>
-<button class="btn" onclick="add('Kota Combo + Wings + Mocktail',100)">Add</button>
-</div>
-
-<h2>Traditional Meals</h2>
-
-<div class="card">
-<h3>Mogodu Meal</h3>
-<p>R60</p>
-<button class="btn" onclick="add('Mogodu Meal',60)">Add</button>
-</div>
-
-<div class="card">
-<h3>Pork Trotters Meal</h3>
-<p>R60</p>
-<button class="btn" onclick="add('Pork Trotters Meal',60)">Add</button>
-</div>
-
-<div class="card">
-<h3>Chicken Traditional Meal</h3>
-<p>R60</p>
-<button class="btn" onclick="add('Chicken Traditional Meal',60)">Add</button>
-</div>
-
-<div class="card">
-<h3>Beef Stew Meal</h3>
-<p>R60</p>
-<button class="btn" onclick="add('Beef Stew Meal',60)">Add</button>
-</div>
-
-<div class="card">
-<h3>Wors Meal</h3>
-<p>R60</p>
-<button class="btn" onclick="add('Wors Meal',60)">Add</button>
-</div>
-
-<div class="card">
-<h3>Meatballs Meal</h3>
-<p>R60</p>
-<button class="btn" onclick="add('Meatballs Meal',60)">Add</button>
 </div>
 
 </div>
 
+</div>
+
+<!-- CART -->
 <div class="cart">
 
 <p id="cartText">Cart Empty</p>
 
-<input id="customer" placeholder="Customer Name">
+<button class="locBtn" onclick="getLocation()">📍 Use Live Location</button>
 
-<input id="address" placeholder="Delivery Address">
-
-<button class="btn removeBtn" onclick="removeLast()">
-Remove Last Item
-</button>
-
-<button class="btn clearBtn" onclick="clearCart()">
-Clear Cart
-</button>
-
-<button class="btn" onclick="checkout()">
-Checkout WhatsApp
-</button>
+<button class="removeBtn" onclick="removeLast()">Remove Last</button>
+<button class="clearBtn" onclick="clearCart()">Clear Cart</button>
+<button class="checkoutBtn" onclick="checkout()">Checkout WhatsApp</button>
 
 </div>
 
 <script>
 
-let cart=[];
+let cart = [];
+let deliveryFee = 15;
+let liveLocation = "";
 
-function add(name,price){
-cart.push({name,price});
-update();
+function add(name, price){
+  cart.push({name, price});
+  update();
 }
 
 function update(){
+  if(cart.length === 0){
+    document.getElementById("cartText").innerText = "Cart Empty";
+    return;
+  }
 
-let total=0;
-let text="Cart: ";
+  let text = "";
+  let total = 0;
 
-cart.forEach(item=>{
-text+=item.name+", ";
-total+=item.price;
-});
+  cart.forEach(item=>{
+    text += `${item.name} - R${item.price}\n`;
+    total += item.price;
+  });
 
-if(cart.length===0){
-text="Cart Empty";
-}else{
-text+=" | Total: R"+total;
-}
+  text += `\nSubtotal: R${total}`;
+  text += `\nDelivery: R${deliveryFee}`;
+  text += `\nTotal: R${total + deliveryFee}`;
 
-document.getElementById("cartText").innerText=text;
+  document.getElementById("cartText").innerText = text;
 }
 
 function removeLast(){
-cart.pop();
-update();
+  cart.pop();
+  update();
 }
 
 function clearCart(){
-cart=[];
-update();
+  cart = [];
+  update();
+}
+
+function getLocation(){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(pos=>{
+      liveLocation = `https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`;
+      alert("Live location added!");
+    });
+  } else {
+    alert("Location not supported");
+  }
 }
 
 function orderID(){
-return "IE-"+Math.floor(Math.random()*999999);
+  return "KE-" + Math.floor(Math.random()*999999);
 }
 
 function checkout(){
 
-if(cart.length===0){
-alert("Cart Empty");
-return;
-}
+  if(cart.length === 0){
+    alert("Cart Empty");
+    return;
+  }
 
-let customer=document.getElementById("customer").value;
-let address=document.getElementById("address").value;
+  let total = 0;
 
-if(customer===""){
-alert("Enter customer name");
-return;
-}
+  let msg = "🍔 KASI EATS ORDER\n\n";
+  msg += "Order ID: " + orderID() + "\n\n";
+  msg += "Items:\n";
 
-if(address===""){
-alert("Enter delivery address");
-return;
-}
+  cart.forEach(item=>{
+    msg += "- " + item.name + " (R" + item.price + ")\n";
+    total += item.price;
+  });
 
-let total=0;
+  msg += "\nSubtotal: R" + total;
+  msg += "\nDelivery: R" + deliveryFee;
+  msg += "\nTOTAL: R" + (total + deliveryFee);
 
-let msg="🔥 INTO EMNANDI CATERING ORDER%0A%0A";
+  if(liveLocation){
+    msg += "\n\nLive Location:\n" + liveLocation;
+  } else {
+    msg += "\n\nLocation: Not provided";
+  }
 
-msg+="Order ID: "+orderID()+"%0A";
-msg+="Customer: "+customer+"%0A%0A";
+  const phone = "27774950915";
 
-msg+="Items:%0A";
-
-cart.forEach(item=>{
-msg+="- "+item.name+" (R"+item.price+")%0A";
-total+=item.price;
-});
-
-msg+="%0AAddress:%0A"+address+"%0A";
-msg+="%0ATotal: R"+total;
-
-const phone="27774950915";
-
-window.open(
-"https://wa.me/"+phone+"?text="+msg,
-"_blank"
-);
-
+  window.open(
+    "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg),
+    "_blank"
+  );
 }
 
 </script>
