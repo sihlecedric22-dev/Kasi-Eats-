@@ -33,7 +33,6 @@ h2{
   color:#ff9800;
 }
 
-/* GRID MENU */
 .grid{
   display:grid;
   grid-template-columns: repeat(2, 1fr);
@@ -50,7 +49,7 @@ h2{
 
 .card img{
   width:100%;
-  height:100px;
+  height:95px;
   object-fit:cover;
 }
 
@@ -100,7 +99,6 @@ h2{
 .removeBtn{ background:#f44336; color:white; }
 .clearBtn{ background:#555; color:white; }
 .checkoutBtn{ background:#25D366; color:white; }
-.locBtn{ background:#2196F3; color:white; }
 </style>
 
 </head>
@@ -111,47 +109,208 @@ h2{
 
 <div class="container">
 
-<h2>Menu</h2>
+<h2>Main Meals</h2>
 
 <div class="grid">
 
-<!-- ITEM 1 -->
+<!-- MENU YOU SENT (RESTORED) -->
 <div class="card">
 <img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086">
 <div class="card-body">
-<h3>Beef Burger</h3>
-<p class="price">R45</p>
-<button class="btn" onclick="add('Beef Burger',45)">Add</button>
+<h3>Pap & Creamy Samp Chicken</h3>
+<p class="price">R60</p>
+<button class="btn" onclick="add('Pap & Creamy Samp Chicken',60)">Add</button>
 </div>
 </div>
 
-<!-- ITEM 2 -->
 <div class="card">
 <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
 <div class="card-body">
-<h3>Chicken Wrap</h3>
-<p class="price">R40</p>
-<button class="btn" onclick="add('Chicken Wrap',40)">Add</button>
+<h3>Grilled Chicken</h3>
+<p class="price">R50</p>
+<button class="btn" onclick="add('Grilled Chicken',50)">Add</button>
 </div>
 </div>
 
-<!-- ITEM 3 -->
 <div class="card">
 <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
 <div class="card-body">
-<h3>Kota Special</h3>
-<p class="price">R35</p>
-<button class="btn" onclick="add('Kota Special',35)">Add</button>
+<h3>Wings + Chips + Salad</h3>
+<p class="price">R65</p>
+<button class="btn" onclick="add('Wings + Chips + Salad',65)">Add</button>
 </div>
 </div>
 
-<!-- ITEM 4 -->
 <div class="card">
 <img src="https://images.unsplash.com/photo-1606757389667-9c4b1a4d2f3b">
 <div class="card-body">
-<h3>Chips & Russian</h3>
+<h3>Chicken Wrap + Wings + Chips</h3>
+<p class="price">R45</p>
+<button class="btn" onclick="add('Chicken Wrap + Wings + Chips',45)">Add</button>
+</div>
+</div>
+
+</div>
+
+<h2>Kota Menu</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+<div class="card-body">
+<h3>Kota R15</h3>
+<p>Achar, Polony, Chips</p>
+<p class="price">R15</p>
+<button class="btn" onclick="add('Kota R15',15)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+<div class="card-body">
+<h3>Kota R20</h3>
+<p>Achar, Polony, Vienna, Chips</p>
+<p class="price">R20</p>
+<button class="btn" onclick="add('Kota R20',20)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+<div class="card-body">
+<h3>Kota R25</h3>
+<p>Achar, Polony, Vienna, Egg, Chips</p>
+<p class="price">R25</p>
+<button class="btn" onclick="add('Kota R25',25)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+<div class="card-body">
+<h3>Kota R30</h3>
+<p>Achar, Polony, Vienna, Egg, Cheese, Chips</p>
 <p class="price">R30</p>
-<button class="btn" onclick="add('Chips & Russian',30)">Add</button>
+<button class="btn" onclick="add('Kota R30',30)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+<div class="card-body">
+<h3>Kota R35</h3>
+<p>Egg, Cheese, Russian, Burger</p>
+<p class="price">R35</p>
+<button class="btn" onclick="add('Kota R35',35)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+<div class="card-body">
+<h3>Kota R40</h3>
+<p>Full Vienna, Egg, Cheese, Russian, Burger</p>
+<p class="price">R40</p>
+<button class="btn" onclick="add('Kota R40',40)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+<div class="card-body">
+<h3>Kota R50</h3>
+<p>Full Vienna, Egg, Cheese, Full Russian, Burger</p>
+<p class="price">R50</p>
+<button class="btn" onclick="add('Kota R50',50)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+<div class="card-body">
+<h3>Kota R60</h3>
+<p>Full Vienna, Egg, Cheese, Full Russian, Full Burger</p>
+<p class="price">R60</p>
+<button class="btn" onclick="add('Kota R60',60)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+<div class="card-body">
+<h3>Kota Combo + Mocktail</h3>
+<p class="price">R80</p>
+<button class="btn" onclick="add('Kota Combo + Mocktail',80)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+<div class="card-body">
+<h3>Kota Combo + Wings + Mocktail</h3>
+<p class="price">R100</p>
+<button class="btn" onclick="add('Kota Combo + Wings + Mocktail',100)">Add</button>
+</div>
+</div>
+
+</div>
+
+<h2>Traditional Meals</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086">
+<div class="card-body">
+<h3>Mogodu Meal</h3>
+<p class="price">R60</p>
+<button class="btn" onclick="add('Mogodu Meal',60)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086">
+<div class="card-body">
+<h3>Pork Trotters Meal</h3>
+<p class="price">R60</p>
+<button class="btn" onclick="add('Pork Trotters Meal',60)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086">
+<div class="card-body">
+<h3>Chicken Traditional Meal</h3>
+<p class="price">R60</p>
+<button class="btn" onclick="add('Chicken Traditional Meal',60)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086">
+<div class="card-body">
+<h3>Beef Stew Meal</h3>
+<p class="price">R60</p>
+<button class="btn" onclick="add('Beef Stew Meal',60)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086">
+<div class="card-body">
+<h3>Wors Meal</h3>
+<p class="price">R60</p>
+<button class="btn" onclick="add('Wors Meal',60)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086">
+<div class="card-body">
+<h3>Meatballs Meal</h3>
+<p class="price">R60</p>
+<button class="btn" onclick="add('Meatballs Meal',60)">Add</button>
 </div>
 </div>
 
@@ -164,8 +323,6 @@ h2{
 
 <p id="cartText">Cart Empty</p>
 
-<button class="locBtn" onclick="getLocation()">📍 Use Live Location</button>
-
 <button class="removeBtn" onclick="removeLast()">Remove Last</button>
 <button class="clearBtn" onclick="clearCart()">Clear Cart</button>
 <button class="checkoutBtn" onclick="checkout()">Checkout WhatsApp</button>
@@ -176,7 +333,6 @@ h2{
 
 let cart = [];
 let deliveryFee = 15;
-let liveLocation = "";
 
 function add(name, price){
   cart.push({name, price});
@@ -214,22 +370,24 @@ function clearCart(){
   update();
 }
 
-function getLocation(){
-  if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(pos=>{
-      liveLocation = `https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`;
-      alert("Live location added!");
-    });
-  } else {
-    alert("Location not supported");
-  }
-}
-
 function orderID(){
   return "KE-" + Math.floor(Math.random()*999999);
 }
 
-function checkout(){
+function getLocation(){
+  return new Promise((resolve)=>{
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(pos=>{
+        let link = `https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`;
+        resolve(link);
+      }, ()=>resolve("Location not allowed"));
+    } else {
+      resolve("Location not supported");
+    }
+  });
+}
+
+async function checkout(){
 
   if(cart.length === 0){
     alert("Cart Empty");
@@ -237,6 +395,7 @@ function checkout(){
   }
 
   let total = 0;
+  let location = await getLocation();
 
   let msg = "🍔 KASI EATS ORDER\n\n";
   msg += "Order ID: " + orderID() + "\n\n";
@@ -250,12 +409,7 @@ function checkout(){
   msg += "\nSubtotal: R" + total;
   msg += "\nDelivery: R" + deliveryFee;
   msg += "\nTOTAL: R" + (total + deliveryFee);
-
-  if(liveLocation){
-    msg += "\n\nLive Location:\n" + liveLocation;
-  } else {
-    msg += "\n\nLocation: Not provided";
-  }
+  msg += "\n\nLocation:\n" + location;
 
   const phone = "27774950915";
 
