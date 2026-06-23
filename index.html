@@ -130,6 +130,15 @@ body{
   border:none;
 }
 
+/* CUSTOMER INPUT */
+#customerName{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border-radius:8px;
+  border:none;
+}
+
 /* GPS BUTTON */
 .gpsBtn{
   width:100%;
@@ -164,8 +173,13 @@ body{
 
 <h3>Total: R<span id="cartTotal">0</span></h3>
 
+<!-- CUSTOMER NAME -->
+<input id="customerName" placeholder="Enter customer name">
+
+<!-- LOCATION -->
 <input id="locationInput" placeholder="Enter your location (e.g. Soshanguve Block H)">
 
+<!-- GPS -->
 <button class="gpsBtn" onclick="getGPSLocation()">
 📍 Use My GPS Location
 </button>
@@ -311,16 +325,17 @@ function getGPSLocation(){
   );
 }
 
-/* ✅ CLEAN WHATSAPP CHECKOUT (NO %0A) */
+/* CHECKOUT */
 function checkoutWhatsApp(){
 
   let orderID = generateOrderID();
   let location = document.getElementById("locationInput").value;
+  let customer = document.getElementById("customerName").value;
 
   let msg = "🔥 INTO EMNANDI CATERING ORDER 🔥\n\n";
 
   msg += "🧾 Order ID: " + orderID + "\n";
-  msg += "👤 Customer: Sihle\n\n";
+  msg += "👤 Customer: " + (customer ? customer : "Walk-in Customer") + "\n\n";
 
   msg += "🍽 ITEMS:\n";
 
