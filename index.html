@@ -132,7 +132,7 @@ body{
 
 <div class="header">🔥 Kasi Eats</div>
 
-<!-- CART BUTTON -->
+<!-- CART -->
 <div id="cartBtn" onclick="toggleCart()">
 🛒 Cart (<span id="cartCount">0</span>)
 </div>
@@ -177,32 +177,43 @@ Checkout on WhatsApp
 
 <script>
 
-/* ORDER ID */
 function generateOrderID(){
   return "KE-" + Math.floor(1000 + Math.random() * 9000);
 }
 
 let cart = {};
 
-/* ✅ UPDATED FULL MENU (YOUR NEW ITEMS) */
+/* ✅ FULL MENU (KOTA + NEW ITEMS) */
 let menu = [
-  /* MAIN MEALS */
+
+  /* 🍞 KOTA MENU (RESTORED) */
+  {name:"R15 Kota", price:15, desc:"Chips + Archaar + Polony"},
+  {name:"R20 Kota", price:20, desc:"+ Vienna"},
+  {name:"R30 Kota", price:30, desc:"+ Vienna + Egg + Cheese"},
+  {name:"R35 Kota", price:35, desc:"+ Vienna + Egg + Russian + Cheese + Burger"},
+  {name:"R40 Kota", price:40, desc:"Full Vienna + Egg + Russian + Cheese + Half Burger"},
+  {name:"R50 Kota", price:50, desc:"Full Combo Kota"},
+  {name:"R60 Kota", price:60, desc:"Loaded Kota"},
+  {name:"R80 Kota (Deluxe)", price:80, desc:"Deluxe Kota + Drink"},
+  {name:"R100 Kota (Ultimate)", price:100, desc:"Ultimate Kota + Wings + Drink"},
+
+  /* 🍗 MAIN MEALS */
   {name:"Wings + Chips", price:45, desc:"Crispy wings with chips"},
-  {name:"Wings + Chips + Salad", price:50, desc:"Wings, chips and fresh salad"},
-  {name:"Chicken Wrap + Chips + Wings", price:65, desc:"Full combo wrap meal"},
-  {name:"Pap / Creamy Samp + Quarter Chicken + Side", price:60, desc:"Traditional combo meal"},
+  {name:"Wings + Chips + Salad", price:50, desc:"Wings, chips and salad"},
+  {name:"Chicken Wrap + Chips + Wings", price:65, desc:"Full wrap combo"},
+  {name:"Pap / Samp + Quarter Chicken + Side", price:60, desc:"Traditional combo meal"},
 
-  /* CHIPS */
-  {name:"Chips (Small)", price:15, desc:"Small portion chips"},
-  {name:"Chips (Medium)", price:25, desc:"Medium portion chips"},
-  {name:"Chips (Large)", price:35, desc:"Large portion chips"},
+  /* 🍟 CHIPS */
+  {name:"Chips (Small)", price:15, desc:"Small chips"},
+  {name:"Chips (Medium)", price:25, desc:"Medium chips"},
+  {name:"Chips (Large)", price:35, desc:"Large chips"},
 
-  /* TRADITIONAL MEALS */
-  {name:"Pap/Creamy Samp/Dombolo + Mogodu + 2 Sides", price:60, desc:"Traditional hearty meal"},
-  {name:"Basic + Chicken + 2 Sides", price:60, desc:"Pap/Samp/Dombolo with chicken"},
-  {name:"Basic + Beef Stew + 2 Sides", price:60, desc:"Pap/Samp/Dombolo with beef stew"},
-  {name:"Basic + Wors + 2 Sides", price:60, desc:"Pap/Samp/Dombolo with wors"},
-  {name:"Basic + Meatballs + 2 Sides", price:60, desc:"Pap/Samp/Dombolo with meatballs"}
+  /* 🍲 TRADITIONAL */
+  {name:"Basic + Mogodu + 2 Sides", price:60, desc:"Pap/Samp/Dombolo + Mogodu"},
+  {name:"Basic + Chicken + 2 Sides", price:60, desc:"Pap/Samp/Dombolo + Chicken"},
+  {name:"Basic + Beef Stew + 2 Sides", price:60, desc:"Pap/Samp/Dombolo + Beef"},
+  {name:"Basic + Wors + 2 Sides", price:60, desc:"Pap/Samp/Dombolo + Wors"},
+  {name:"Basic + Meatballs + 2 Sides", price:60, desc:"Pap/Samp/Dombolo + Meatballs"}
 ];
 
 function renderMenu(){
@@ -258,18 +269,15 @@ function toggleCart(){
   document.getElementById("cartPanel").classList.toggle("open");
 }
 
-/* BACK TO MENU */
 function goBackToMenu(){
   document.getElementById("cartPanel").classList.remove("open");
   document.getElementById("kota").scrollIntoView({behavior:"smooth"});
 }
 
-/* CLOSE SUCCESS */
 function closeSuccess(){
   document.getElementById("successScreen").style.display="none";
 }
 
-/* CHECKOUT */
 function checkoutWhatsApp(){
 
   let orderID = generateOrderID();
@@ -288,9 +296,10 @@ function checkoutWhatsApp(){
 
   let phone = "27700000000";
 
-  let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
-
-  window.open(url, "_blank");
+  window.open(
+    "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg),
+    "_blank"
+  );
 
   document.getElementById("orderInfo").innerText =
     "Order ID: " + orderID + "\nTotal: R" + total;
