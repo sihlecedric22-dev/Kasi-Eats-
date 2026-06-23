@@ -71,7 +71,7 @@ body{
   color:white;
 }
 
-/* CART */
+/* CART BUTTON */
 #cartBtn{
   position:fixed;
   bottom:20px;
@@ -124,7 +124,6 @@ body{
   padding:10px 12px;
   border-radius:10px;
   z-index:1000;
-  cursor:pointer;
 }
 
 #adminPanel{
@@ -138,6 +137,10 @@ body{
   transition:0.3s;
   overflow-y:auto;
   z-index:1000;
+}
+
+#adminPanel.open{
+  left:0;
 }
 
 input{
@@ -159,23 +162,7 @@ input{
 
 <body>
 
-<!-- 🔥 HEADER WITH SCOOTER LOGO -->
-<div class="header">
-  <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
-
-    <!-- SCOOTER ICON -->
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
-      <path d="M18 16.5c-1.1 0-2 .9-2 2s.9 2 2 2
-      2-.9 2-2-.9-2-2-2zm-12 0c-1.1 0-2 .9-2 2s.9 2 2 2
-      2-.9 2-2-.9-2-2-2zm12.3-2.7l-1.4-3.3c-.3-.7-1-1.2-1.8-1.2H11
-      l-.6-2H5c-.6 0-1 .4-1 1s.4 1 1 1h4.1l1.7 5H9.2c-.6 0-1 .4-1 1
-      s.4 1 1 1h5.2c.8 0 1.5-.5 1.8-1.2l1.3-3.1z"/>
-    </svg>
-
-    <span>Kasi Eats</span>
-
-  </div>
-</div>
+<div class="header">🔥 Kasi Eats</div>
 
 <!-- CART BUTTON -->
 <div id="cartBtn" onclick="toggleCart()">
@@ -185,7 +172,7 @@ input{
 <!-- ADMIN BUTTON -->
 <button id="adminBtn" onclick="toggleAdmin()">⚙ Admin</button>
 
-<!-- CART -->
+<!-- CART PANEL -->
 <div id="cartPanel">
 <h2>Your Order</h2>
 <div id="cartItems"></div>
@@ -196,7 +183,7 @@ Checkout on WhatsApp
 </button>
 </div>
 
-<!-- ADMIN -->
+<!-- ADMIN PANEL -->
 <div id="adminPanel">
 <h2>Admin Panel</h2>
 
@@ -217,56 +204,47 @@ Add Item
 <div id="kota"></div>
 
 <script>
-let cart = {};
 
-/* 🍔 CLEAN KOTA MENU */
-let menu = JSON.parse(localStorage.getItem("menu")) || [
-  {
-    name:"R15 Kota",
-    price:15,
-    desc:"Chips + Polony + Achaar",
-    img:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    name:"R20 Kota",
-    price:20,
-    desc:"Chips + Polony + Vienna + Achaar",
-    img:"https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    name:"R30 Kota",
-    price:30,
-    desc:"Chips + Vienna + Egg + Cheese",
-    img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    name:"R35 Kota",
-    price:35,
-    desc:"Chips + Vienna + Egg + Russian + Cheese",
-    img:"https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    name:"R40 Kota",
-    price:40,
-    desc:"Full Loaded Kota",
-    img:"https://images.unsplash.com/photo-1604908554162-45f1a2c9b2a3?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    name:"R50 Kota",
-    price:50,
-    desc:"Mega Premium Kota",
-    img:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80"
-  }
-];
-
-/* SAVE */
-function saveMenu(){
-  localStorage.setItem("menu", JSON.stringify(menu));
-  renderMenu();
-  renderAdmin();
+/* ORDER ID */
+function generateOrderID(){
+  return "KE-" + Math.floor(1000 + Math.random() * 9000);
 }
 
-/* CART */
+let cart = {};
+
+/* MENU */
+let menu = JSON.parse(localStorage.getItem("menu")) || [
+  {name:"R15 Kota", price:15, desc:"Chips + Archaar + Polony", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80"},
+  {name:"R20 Kota", price:20, desc:"+ Vienna", img:"https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=800&q=80"},
+  {name:"R30 Kota", price:30, desc:"+ Vienna + Egg + Cheese", img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=80"},
+  {name:"R35 Kota", price:35, desc:"+ Vienna + Egg + Russian + Cheese + Burger", img:"https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=800&q=80"},
+  {name:"R40 Kota", price:40, desc:"Full Vienna + Egg + Russian + Cheese + Half Burger", img:"https://images.unsplash.com/photo-1604908554162-45f1a2c9b2a3?auto=format&fit=crop&w=800&q=80"},
+  {name:"R50 Kota", price:50, desc:"Full Combo", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80"}
+];
+
+function renderMenu(){
+  let box = document.getElementById("kota");
+  box.innerHTML = "";
+
+  menu.forEach(item=>{
+    box.innerHTML += `
+      <div class="card">
+        <img src="${item.img}">
+        <div class="card-body">
+          <h3>${item.name}</h3>
+          <p>${item.desc}</p>
+          <p class="price">R${item.price}</p>
+
+          <div class="qty">
+            <button onclick="addItem('${item.name}',${item.price})">Add</button>
+            <button onclick="removeItem('${item.name}')">Remove</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
 function addItem(name, price){
   if(!cart[name]) cart[name]={qty:0, price};
   cart[name].qty++;
@@ -287,104 +265,50 @@ function updateCart(){
   box.innerHTML="";
 
   for(let k in cart){
-    total+=cart[k].price*cart[k].qty;
-    count+=cart[k].qty;
-    box.innerHTML+=`<p>${k} x${cart[k].qty} - R${cart[k].price*cart[k].qty}</p>`;
+    total += cart[k].price * cart[k].qty;
+    count += cart[k].qty;
+
+    box.innerHTML += `<p>${k} x${cart[k].qty} - R${cart[k].price * cart[k].qty}</p>`;
   }
 
-  document.getElementById("cartTotal").innerText=total;
-  document.getElementById("cartCount").innerText=count;
+  document.getElementById("cartTotal").innerText = total;
+  document.getElementById("cartCount").innerText = count;
 }
 
-/* CART TOGGLE */
 function toggleCart(){
   document.getElementById("cartPanel").classList.toggle("open");
 }
 
-/* WHATSAPP */
+function toggleAdmin(){
+  document.getElementById("adminPanel").classList.toggle("open");
+}
+
+/* ✅ FINAL CHECKOUT WITH ORDER ID */
 function checkoutWhatsApp(){
-  let msg="🔥 Kasi Eats Order:%0A";
-  let total=0;
+
+  let orderID = generateOrderID();
+
+  let msg = "🔥 Kasi Eats Order:%0A";
+  msg += "🧾 Order ID: " + orderID + "%0A%0A";
+
+  let total = 0;
 
   for(let k in cart){
-    msg+=`${k} x${cart[k].qty}%0A`;
-    total+=cart[k].price*cart[k].qty;
+    msg += k + " x" + cart[k].qty + "%0A";
+    total += cart[k].price * cart[k].qty;
   }
 
-  msg+=`%0A💰 Total: R${total}`;
-  window.open("https://wa.me/27800000000?text="+msg,"_blank");
+  msg += "%0A💰 Total: R" + total + "%0A";
+
+  let phone = "27700000000"; // 🔁 CHANGE THIS
+
+  let url = "https://wa.me/" + phone + "?text=" + msg;
+
+  window.open(url, "_blank");
 }
 
-/* ADMIN */
-function toggleAdmin(){
-  let p=document.getElementById("adminPanel");
-  p.style.left=p.style.left==="0px"?"-350px":"0px";
-}
-
-function addItemAdmin(){
-  let n=document.getElementById("name").value;
-  let p=parseInt(document.getElementById("price").value);
-  let d=document.getElementById("desc").value;
-  let i=document.getElementById("img").value;
-
-  if(!n || !p || !i) return alert("Fill all fields");
-
-  menu.push({name:n,price:p,desc:d,img:i});
-  saveMenu();
-}
-
-function deleteItem(i){
-  menu.splice(i,1);
-  saveMenu();
-}
-
-/* ADMIN LIST */
-function renderAdmin(){
-  let box=document.getElementById("adminList");
-  box.innerHTML="";
-
-  menu.forEach((m,i)=>{
-    box.innerHTML+=`
-      <div class="admin-item">
-        <b>${m.name}</b><br>
-        R${m.price}<br>
-        <small>${m.desc}</small><br>
-        <button onclick="deleteItem(${i})"
-        style="background:red;color:white;border:none;padding:5px;margin-top:5px;">
-          Delete
-        </button>
-      </div>
-    `;
-  });
-}
-
-/* MENU */
-function renderMenu(){
-  let box=document.getElementById("kota");
-  box.innerHTML="";
-
-  menu.forEach(m=>{
-    box.innerHTML+=`
-      <div class="card">
-        <img src="${m.img}">
-        <div class="card-body">
-          <h3>${m.name}</h3>
-          <p class="price">${m.desc}</p>
-
-          <div class="qty">
-            <button onclick="addItem('${m.name}',${m.price})">+</button>
-            <button onclick="removeItem('${m.name}')">−</button>
-          </div>
-        </div>
-      </div>
-    `;
-  });
-}
-
-/* INIT */
 renderMenu();
-renderAdmin();
-updateCart();
+
 </script>
 
 </body>
