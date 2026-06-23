@@ -184,17 +184,25 @@ function generateOrderID(){
 
 let cart = {};
 
-/* FULL MENU R15–R100 */
+/* ✅ UPDATED FULL MENU (YOUR NEW ITEMS) */
 let menu = [
-  {name:"R15 Kota", price:15, desc:"Chips + Archaar + Polony"},
-  {name:"R20 Kota", price:20, desc:"+ Vienna"},
-  {name:"R30 Kota", price:30, desc:"+ Vienna + Egg + Cheese"},
-  {name:"R35 Kota", price:35, desc:"+ Vienna + Egg + Russian + Cheese + Burger"},
-  {name:"R40 Kota", price:40, desc:"Full Vienna + Egg + Russian + Cheese + Half Burger"},
-  {name:"R50 Kota", price:50, desc:"Full Combo"},
-  {name:"R60 Kota", price:60, desc:"Full Combo + Extras"},
-  {name:"R80 Kota (Deluxe)", price:80, desc:"Full Combo + Drink"},
-  {name:"R100 Kota (Ultimate)", price:100, desc:"Full Combo + Wings + Drink"}
+  /* MAIN MEALS */
+  {name:"Wings + Chips", price:45, desc:"Crispy wings with chips"},
+  {name:"Wings + Chips + Salad", price:50, desc:"Wings, chips and fresh salad"},
+  {name:"Chicken Wrap + Chips + Wings", price:65, desc:"Full combo wrap meal"},
+  {name:"Pap / Creamy Samp + Quarter Chicken + Side", price:60, desc:"Traditional combo meal"},
+
+  /* CHIPS */
+  {name:"Chips (Small)", price:15, desc:"Small portion chips"},
+  {name:"Chips (Medium)", price:25, desc:"Medium portion chips"},
+  {name:"Chips (Large)", price:35, desc:"Large portion chips"},
+
+  /* TRADITIONAL MEALS */
+  {name:"Pap/Creamy Samp/Dombolo + Mogodu + 2 Sides", price:60, desc:"Traditional hearty meal"},
+  {name:"Basic + Chicken + 2 Sides", price:60, desc:"Pap/Samp/Dombolo with chicken"},
+  {name:"Basic + Beef Stew + 2 Sides", price:60, desc:"Pap/Samp/Dombolo with beef stew"},
+  {name:"Basic + Wors + 2 Sides", price:60, desc:"Pap/Samp/Dombolo with wors"},
+  {name:"Basic + Meatballs + 2 Sides", price:60, desc:"Pap/Samp/Dombolo with meatballs"}
 ];
 
 function renderMenu(){
@@ -284,13 +292,11 @@ function checkoutWhatsApp(){
 
   window.open(url, "_blank");
 
-  /* SUCCESS SCREEN */
   document.getElementById("orderInfo").innerText =
     "Order ID: " + orderID + "\nTotal: R" + total;
 
   document.getElementById("successScreen").style.display="block";
 
-  /* RESET CART */
   cart = {};
   updateCart();
   toggleCart();
