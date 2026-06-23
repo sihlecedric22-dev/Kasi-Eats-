@@ -129,6 +129,19 @@ body{
   border-radius:8px;
   border:none;
 }
+
+/* GPS BUTTON */
+.gpsBtn{
+  width:100%;
+  padding:10px;
+  margin-top:8px;
+  border:none;
+  border-radius:8px;
+  background:#2196f3;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
 </style>
 </head>
 
@@ -152,6 +165,10 @@ body{
 <h3>Total: R<span id="cartTotal">0</span></h3>
 
 <input id="locationInput" placeholder="Enter your location (e.g. Soshanguve Block H)">
+
+<button class="gpsBtn" onclick="getGPSLocation()">
+📍 Use My GPS Location
+</button>
 
 <button class="checkout" onclick="checkoutWhatsApp()">
 Checkout on WhatsApp
@@ -272,32 +289,52 @@ function goBackToMenu(){
   document.getElementById("kota").scrollIntoView({behavior:"smooth"});
 }
 
-/* ✅ UPDATED CHECKOUT FORMAT */
+/* GPS */
+function getGPSLocation(){
+  if(!navigator.geolocation){
+    alert("GPS not supported on this device");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    function(position){
+      let lat = position.coords.latitude;
+      let lng = position.coords.longitude;
+      let link = "https://maps.google.com/?q=" + lat + "," + lng;
+
+      document.getElementById("locationInput").value = link;
+      alert("Location captured successfully!");
+    },
+    function(){
+      alert("Unable to get location. Please enable GPS.");
+    }
+  );
+}
+
+/* ✅ CLEAN WHATSAPP CHECKOUT (NO %0A) */
 function checkoutWhatsApp(){
 
   let orderID = generateOrderID();
   let location = document.getElementById("locationInput").value;
 
-  let msg = "🔥 *INTO EMNANDI CATERING ORDER* 🔥%0A%0A";
+  let msg = "🔥 INTO EMNANDI CATERING ORDER 🔥\n\n";
 
-  msg += "🧾 Order ID: " + orderID + "%0A";
-  msg += "👤 Customer: Sihle%0A%0A";
+  msg += "🧾 Order ID: " + orderID + "\n";
+  msg += "👤 Customer: Sihle\n\n";
 
-  msg += "🍽 ITEMS:%0A";
-
-  for(let k in cart){
-    msg += "• " + k + " x" + cart[k].qty + " (R" + (cart[k].price * cart[k].qty) + ")%0A";
-  }
-
-  msg += "%0A📍 Address:%0A";
-  msg += (location ? location : "Not provided") + "%0A%0A";
+  msg += "🍽 ITEMS:\n";
 
   let total = 0;
+
   for(let k in cart){
+    msg += "• " + k + " x" + cart[k].qty + " (R" + (cart[k].price * cart[k].qty) + ")\n";
     total += cart[k].price * cart[k].qty;
   }
 
-  msg += "💰 Total: R" + total + "%0A";
+  msg += "\n📍 Address:\n";
+  msg += (location ? location : "Not provided") + "\n\n";
+
+  msg += "💰 Total: R" + total + "\n";
 
   let phone = "27774950915";
 
