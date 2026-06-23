@@ -56,7 +56,7 @@ body{
   color:white;
 }
 
-/* CART */
+/* CART BUTTON */
 #cartBtn{
   position:fixed;
   bottom:20px;
@@ -70,6 +70,7 @@ body{
   z-index:1000;
 }
 
+/* CART PANEL */
 #cartPanel{
   position:fixed;
   right:-350px;
@@ -83,7 +84,9 @@ body{
   z-index:1000;
 }
 
-#cartPanel.open{right:0;}
+#cartPanel.open{
+  right:0;
+}
 
 .checkout{
   background:#25D366;
@@ -95,8 +98,15 @@ body{
   border-radius:10px;
 }
 
-/* BUTTON */
-button{
+/* BACK BUTTON */
+.backBtn{
+  background:#444;
+  color:white;
+  border:none;
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:10px;
   cursor:pointer;
 }
 </style>
@@ -114,6 +124,12 @@ button{
 <!-- CART PANEL -->
 <div id="cartPanel">
 <h2>Your Order</h2>
+
+<!-- BACK BUTTON ADDED -->
+<button class="backBtn" onclick="toggleCart()">
+⬅ Back to Menu
+</button>
+
 <div id="cartItems"></div>
 <h3>Total: R<span id="cartTotal">0</span></h3>
 
@@ -189,6 +205,7 @@ function updateCart(){
   for(let k in cart){
     total+=cart[k].price*cart[k].qty;
     count+=cart[k].qty;
+
     box.innerHTML+=`<p>${k} x${cart[k].qty} - R${cart[k].price*cart[k].qty}</p>`;
   }
 
@@ -200,7 +217,7 @@ function toggleCart(){
   document.getElementById("cartPanel").classList.toggle("open");
 }
 
-/* CHECKOUT WITH ORDER ID */
+/* CHECKOUT */
 function checkoutWhatsApp(){
 
   let orderID = generateOrderID();
@@ -217,7 +234,7 @@ function checkoutWhatsApp(){
 
   msg += "%0A💰 Total: R" + total + "%0A";
 
-  let phone = "27700000000"; // CHANGE THIS
+  let phone = "27700000000";
 
   let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
 
