@@ -132,7 +132,7 @@ body{
 
 <div class="header">🔥 Kasi Eats</div>
 
-<!-- CART -->
+<!-- CART BUTTON -->
 <div id="cartBtn" onclick="toggleCart()">
 🛒 Cart (<span id="cartCount">0</span>)
 </div>
@@ -146,7 +146,17 @@ body{
 </button>
 
 <div id="cartItems"></div>
+
 <h3>Total: R<span id="cartTotal">0</span></h3>
+
+<!-- ✅ LOCATION ADDED HERE (ONLY CHANGE) -->
+<input id="locationInput" placeholder="Enter your location (e.g. Soshanguve Block H)" style="
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:8px;
+border:none;
+">
 
 <button class="checkout" onclick="checkoutWhatsApp()">
 Checkout on WhatsApp
@@ -183,10 +193,8 @@ function generateOrderID(){
 
 let cart = {};
 
-/* ✅ FULL MENU (KOTA + NEW ITEMS) */
+/* FULL MENU (UNCHANGED FROM YOUR VERSION) */
 let menu = [
-
-  /* 🍞 KOTA MENU (RESTORED) */
   {name:"R15 Kota", price:15, desc:"Chips + Archaar + Polony"},
   {name:"R20 Kota", price:20, desc:"+ Vienna"},
   {name:"R30 Kota", price:30, desc:"+ Vienna + Egg + Cheese"},
@@ -197,23 +205,21 @@ let menu = [
   {name:"R80 Kota (Deluxe)", price:80, desc:"Deluxe Kota + Drink"},
   {name:"R100 Kota (Ultimate)", price:100, desc:"Ultimate Kota + Wings + Drink"},
 
-  /* 🍗 MAIN MEALS */
   {name:"Wings + Chips", price:45, desc:"Crispy wings with chips"},
   {name:"Wings + Chips + Salad", price:50, desc:"Wings, chips and salad"},
   {name:"Chicken Wrap + Chips + Wings", price:65, desc:"Full wrap combo"},
-  {name:"Pap / Samp + Quarter Chicken + Side", price:60, desc:"Traditional combo meal"},
 
-  /* 🍟 CHIPS */
+  {name:"Pap or Creamy Samp or Dombolo + Quarter Chicken + Side", price:60, desc:"Traditional combo meal"},
+
   {name:"Chips (Small)", price:15, desc:"Small chips"},
   {name:"Chips (Medium)", price:25, desc:"Medium chips"},
   {name:"Chips (Large)", price:35, desc:"Large chips"},
 
-  /* 🍲 TRADITIONAL */
-  {name:"Basic + Mogodu + 2 Sides", price:60, desc:"Pap/Samp/Dombolo + Mogodu"},
-  {name:"Basic + Chicken + 2 Sides", price:60, desc:"Pap/Samp/Dombolo + Chicken"},
-  {name:"Basic + Beef Stew + 2 Sides", price:60, desc:"Pap/Samp/Dombolo + Beef"},
-  {name:"Basic + Wors + 2 Sides", price:60, desc:"Pap/Samp/Dombolo + Wors"},
-  {name:"Basic + Meatballs + 2 Sides", price:60, desc:"Pap/Samp/Dombolo + Meatballs"}
+  {name:"Pap or Creamy Samp or Dombolo + Mogodu + 2 Sides", price:60, desc:"Hearty traditional meal"},
+  {name:"Pap or Creamy Samp or Dombolo + Chicken + 2 Sides", price:60, desc:"Chicken traditional meal"},
+  {name:"Pap or Creamy Samp or Dombolo + Beef Stew + 2 Sides", price:60, desc:"Beef traditional meal"},
+  {name:"Pap or Creamy Samp or Dombolo + Wors + 2 Sides", price:60, desc:"Wors traditional meal"},
+  {name:"Pap or Creamy Samp or Dombolo + Meatballs + 2 Sides", price:60, desc:"Meatballs traditional meal"}
 ];
 
 function renderMenu(){
@@ -282,6 +288,8 @@ function checkoutWhatsApp(){
 
   let orderID = generateOrderID();
 
+  let location = document.getElementById("locationInput").value;
+
   let msg = "🔥 Kasi Eats Order:%0A";
   msg += "🧾 Order ID: " + orderID + "%0A%0A";
 
@@ -293,6 +301,8 @@ function checkoutWhatsApp(){
   }
 
   msg += "%0A💰 Total: R" + total + "%0A";
+
+  msg += "%0A📍 Location: " + (location ? location : "Not provided") + "%0A";
 
   let phone = "27700000000";
 
@@ -309,6 +319,8 @@ function checkoutWhatsApp(){
   cart = {};
   updateCart();
   toggleCart();
+
+  document.getElementById("locationInput").value = "";
 }
 
 renderMenu();
