@@ -41,7 +41,7 @@ body{
 
 .container{
   padding:12px;
-  padding-bottom:80px;
+  padding-bottom:180px;
 }
 
 .section{display:none;}
@@ -80,67 +80,34 @@ body{
   border-radius:6px;
 }
 
-/* MINI CART BAR */
-.miniCart{
+/* CART */
+.cart{
   position:fixed;
   bottom:0;
   left:0;
   right:0;
-  background:#111;
-  color:white;
-  display:flex;
-  justify-content:space-between;
-  padding:10px;
-  border-top:2px solid #25D366;
-}
-
-.miniCart button{
-  background:#25D366;
-  border:none;
-  padding:6px 12px;
-  color:white;
-  border-radius:6px;
-}
-
-/* CART PAGE */
-.cartPage{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
   background:white;
   color:black;
-  padding:16px;
-  display:none;
-  overflow-y:auto;
+  padding:12px;
 }
 
-.clearBtn{
-  background:#555;
-  color:white;
-  border:none;
+#cartText{
+  white-space:pre-line;
+  font-size:13px;
+}
+
+.cart button{
+  width:100%;
+  margin-top:6px;
   padding:10px;
-  margin-top:10px;
-  width:100%;
-  border-radius:6px;
-}
-
-.checkoutBtn{
-  background:#25D366;
-  color:white;
   border:none;
-  padding:10px;
-  margin-top:10px;
-  width:100%;
   border-radius:6px;
+  font-weight:bold;
 }
 
-.hero{
-  width:100%;
-  border-radius:12px;
-  margin-bottom:12px;
-}
+.removeBtn{background:#f44336;color:white;}
+.clearBtn{background:#555;color:white;}
+.checkoutBtn{background:#25D366;color:white;}
 </style>
 </head>
 
@@ -148,58 +115,49 @@ body{
 
 <div class="header">🍔 KASI EATS</div>
 
-<div class="container">
-
-<!-- HERO IMAGES -->
-<img class="hero" src="/mnt/data/a_bright_colorful_restaurant_menu_app_ordering.png">
-<img class="hero" src="/mnt/data/a_high_resolution_screenshot_of_a_mobile_food_orde.png">
-<img class="hero" src="/mnt/data/a_full_screen_mobile_app_website_menu_interface_sc.png">
-
-<!-- TABS -->
 <div class="tabs">
 <button onclick="show('main')">Main</button>
 <button onclick="show('kota')">Kota</button>
 <button onclick="show('trad')">Traditional</button>
 </div>
 
+<div class="container">
+
 <!-- MAIN -->
 <div id="main" class="section active">
 
 <div class="card">
-<img src="/mnt/data/a_high_resolution_screenshot_of_a_mobile_food_orde.png">
+<img src="https://source.unsplash.com/600x400/?pap,chicken">
 <div class="card-body">
 <h3>Pap & Chicken</h3>
 <p class="price">R60</p>
 <div class="qty">
-<button onclick="qty('Pap & Chicken',60,-1)">−</button>
-<span id="q-Pap & Chicken">0</span>
-<button onclick="qty('Pap & Chicken',60,1)">+</button>
+<button onclick="addItem('pap_chicken','Pap & Chicken',60)">+</button>
+<button onclick="removeItem('pap_chicken')">−</button>
 </div>
 </div>
 </div>
 
 <div class="card">
-<img src="/mnt/data/a_bright_colorful_restaurant_menu_app_ordering.png">
+<img src="https://source.unsplash.com/600x400/?grilled,chicken">
 <div class="card-body">
 <h3>Grilled Chicken</h3>
 <p class="price">R50</p>
 <div class="qty">
-<button onclick="qty('Grilled Chicken',50,-1)">−</button>
-<span id="q-Grilled Chicken">0</span>
-<button onclick="qty('Grilled Chicken',50,1)">+</button>
+<button onclick="addItem('grilled_chicken','Grilled Chicken',50)">+</button>
+<button onclick="removeItem('grilled_chicken')">−</button>
 </div>
 </div>
 </div>
 
 <div class="card">
-<img src="/mnt/data/a_full_screen_mobile_app_website_menu_interface_sc.png">
+<img src="https://source.unsplash.com/600x400/?chicken,wings">
 <div class="card-body">
-<h3>Wings Meal</h3>
+<h3>Wings + Chips + Salad</h3>
 <p class="price">R65</p>
 <div class="qty">
-<button onclick="qty('Wings Meal',65,-1)">−</button>
-<span id="q-Wings Meal">0</span>
-<button onclick="qty('Wings Meal',65,1)">+</button>
+<button onclick="addItem('wings_meal','Wings Meal',65)">+</button>
+<button onclick="removeItem('wings_meal')">−</button>
 </div>
 </div>
 </div>
@@ -210,27 +168,37 @@ body{
 <div id="kota" class="section">
 
 <div class="card">
-<img src="/mnt/data/a_bright_colorful_restaurant_menu_app_ordering.png">
+<img src="https://source.unsplash.com/600x400/?kota,bread">
 <div class="card-body">
-<h3>Kota Basic</h3>
-<p class="price">R15</p>
+<h3>Kota R15</h3>
+<p class="price">Basic</p>
 <div class="qty">
-<button onclick="qty('Kota Basic',15,-1)">−</button>
-<span id="q-Kota Basic">0</span>
-<button onclick="qty('Kota Basic',15,1)">+</button>
+<button onclick="addItem('kota_15','Kota R15',15)">+</button>
+<button onclick="removeItem('kota_15')">−</button>
 </div>
 </div>
 </div>
 
 <div class="card">
-<img src="/mnt/data/a_high_resolution_screenshot_of_a_mobile_food_orde.png">
+<img src="https://source.unsplash.com/600x400/?kota,fries">
 <div class="card-body">
-<h3>Kota Medium</h3>
-<p class="price">R20</p>
+<h3>Kota R20</h3>
+<p class="price">Chips + Polony</p>
 <div class="qty">
-<button onclick="qty('Kota Medium',20,-1)">−</button>
-<span id="q-Kota Medium">0</span>
-<button onclick="qty('Kota Medium',20,1)">+</button>
+<button onclick="addItem('kota_20','Kota R20',20)">+</button>
+<button onclick="removeItem('kota_20')">−</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://source.unsplash.com/600x400/?kota,egg">
+<div class="card-body">
+<h3>Kota R30</h3>
+<p class="price">Egg + Cheese + Russian</p>
+<div class="qty">
+<button onclick="addItem('kota_30','Kota R30',30)">+</button>
+<button onclick="removeItem('kota_30')">−</button>
 </div>
 </div>
 </div>
@@ -241,14 +209,25 @@ body{
 <div id="trad" class="section">
 
 <div class="card">
-<img src="/mnt/data/a_full_screen_mobile_app_website_menu_interface_sc.png">
+<img src="https://source.unsplash.com/600x400/?tripe,stew">
 <div class="card-body">
 <h3>Mogodu Meal</h3>
 <p class="price">R60</p>
 <div class="qty">
-<button onclick="qty('Mogodu Meal',60,-1)">−</button>
-<span id="q-Mogodu Meal">0</span>
-<button onclick="qty('Mogodu Meal',60,1)">+</button>
+<button onclick="addItem('mogodu','Mogodu Meal',60)">+</button>
+<button onclick="removeItem('mogodu')">−</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://source.unsplash.com/600x400/?beef,stew">
+<div class="card-body">
+<h3>Beef Stew</h3>
+<p class="price">R60</p>
+<div class="qty">
+<button onclick="addItem('beef_stew','Beef Stew',60)">+</button>
+<button onclick="removeItem('beef_stew')">−</button>
 </div>
 </div>
 </div>
@@ -257,25 +236,13 @@ body{
 
 </div>
 
-<!-- MINI CART -->
-<div class="miniCart">
-<span id="miniText">Cart: Empty</span>
-<button onclick="openCart()">View</button>
-</div>
-
-<!-- CART PAGE -->
-<div id="cartPage" class="cartPage">
-
-<h2>🛒 Your Cart</h2>
-
+<!-- CART -->
+<div class="cart">
 <p id="cartText">Cart Empty</p>
 
+<button class="removeBtn" onclick="removeLast()">Remove Last</button>
 <button class="clearBtn" onclick="clearCart()">Clear Cart</button>
 <button class="checkoutBtn" onclick="checkout()">Checkout WhatsApp</button>
-
-<br><br>
-<button onclick="closeCart()">⬅ Back to Menu</button>
-
 </div>
 
 <script>
@@ -288,17 +255,35 @@ function show(tab){
   document.getElementById(tab).classList.add("active");
 }
 
-function qty(name, price, change){
+function addItem(id, name, price){
+  if(!cart[id]){
+    cart[id] = {name, price, qty:0};
+  }
+  cart[id].qty++;
+  update();
+}
 
-  if(!cart[name]) cart[name] = {qty:0, price};
+function removeItem(id){
+  if(!cart[id]) return;
 
-  cart[name].qty += change;
+  cart[id].qty--;
 
-  if(cart[name].qty <= 0) delete cart[name];
+  if(cart[id].qty <= 0){
+    delete cart[id];
+  }
 
-  let el = document.getElementById("q-"+name);
-  if(el) el.innerText = cart[name] ? cart[name].qty : 0;
+  update();
+}
 
+function removeLast(){
+  let keys = Object.keys(cart);
+  if(keys.length === 0) return;
+  delete cart[keys[keys.length-1]];
+  update();
+}
+
+function clearCart(){
+  cart = {};
   update();
 }
 
@@ -306,19 +291,18 @@ function update(){
 
   let text = "";
   let total = 0;
-  let itemCount = 0;
 
   if(Object.keys(cart).length === 0){
     document.getElementById("cartText").innerText = "Cart Empty";
-    document.getElementById("miniText").innerText = "Cart: Empty";
     return;
   }
 
   for(let i in cart){
-    let t = cart[i].qty * cart[i].price;
-    text += `${i} x${cart[i].qty} - R${t}\n`;
+    let item = cart[i];
+    let t = item.qty * item.price;
+
+    text += `${item.name} x${item.qty} - R${t}\n`;
     total += t;
-    itemCount += cart[i].qty;
   }
 
   text += `\nSubtotal: R${total}`;
@@ -326,24 +310,6 @@ function update(){
   text += `\nTOTAL: R${total + delivery}`;
 
   document.getElementById("cartText").innerText = text;
-  document.getElementById("miniText").innerText = "Cart: " + itemCount + " items";
-}
-
-function openCart(){
-  document.getElementById("cartPage").style.display = "block";
-}
-
-function closeCart(){
-  document.getElementById("cartPage").style.display = "none";
-}
-
-function clearCart(){
-  cart = {};
-  location.reload();
-}
-
-function orderID(){
-  return "KE-" + Math.floor(Math.random()*999999);
 }
 
 function checkout(){
@@ -355,17 +321,18 @@ function checkout(){
 
   let total = 0;
   let msg = "🍔 KASI EATS ORDER\n\n";
-  msg += "Order ID: " + orderID() + "\n\n";
 
   for(let i in cart){
-    let t = cart[i].qty * cart[i].price;
-    msg += "- " + i + " x" + cart[i].qty + " (R" + t + ")\n";
+    let item = cart[i];
+    let t = item.qty * item.price;
+
+    msg += `- ${item.name} x${item.qty} (R${t})\n`;
     total += t;
   }
 
-  msg += "\nSubtotal: R" + total;
-  msg += "\nDelivery: R" + delivery;
-  msg += "\nTOTAL: R" + (total + delivery);
+  msg += `\nSubtotal: R${total}`;
+  msg += `\nDelivery: R${delivery}`;
+  msg += `\nTOTAL: R${total + delivery}`;
 
   window.open(
     "https://wa.me/27774950915?text=" + encodeURIComponent(msg),
