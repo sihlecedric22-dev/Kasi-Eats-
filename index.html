@@ -21,6 +21,7 @@ body{
   font-weight:bold;
   position:sticky;
   top:0;
+  z-index:10;
 }
 
 .tabs{
@@ -30,6 +31,7 @@ body{
   padding:10px;
   position:sticky;
   top:56px;
+  z-index:10;
 }
 
 .tabs button{
@@ -41,7 +43,7 @@ body{
 
 .container{
   padding:12px;
-  padding-bottom:180px;
+  padding-bottom:120px;
 }
 
 .section{display:none;}
@@ -57,7 +59,7 @@ body{
 
 .card img{
   width:100%;
-  height:140px;
+  height:170px;
   object-fit:cover;
 }
 
@@ -68,46 +70,78 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  margin-top:10px;
 }
 
 .qty button{
-  width:34px;
-  height:34px;
+  width:42px;
+  height:42px;
   border:none;
   background:#25D366;
   color:white;
-  font-size:18px;
-  border-radius:6px;
+  font-size:20px;
+  border-radius:8px;
 }
 
-/* CART */
-.cart{
+/* MINI CART BAR (DOES NOT BLOCK MENU) */
+.cartBar{
   position:fixed;
   bottom:0;
   left:0;
   right:0;
+  background:#ffffff;
+  color:black;
+  padding:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 -2px 10px rgba(0,0,0,0.3);
+  z-index:20;
+}
+
+.cartBar button{
+  background:#25D366;
+  border:none;
+  padding:10px 14px;
+  border-radius:6px;
+  color:white;
+  font-weight:bold;
+}
+
+/* CHECKOUT MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(0,0,0,0.7);
+  z-index:50;
+  align-items:center;
+  justify-content:center;
+}
+
+.modalContent{
   background:white;
   color:black;
-  padding:12px;
+  width:90%;
+  max-height:80%;
+  overflow:auto;
+  padding:15px;
+  border-radius:10px;
 }
 
-#cartText{
-  white-space:pre-line;
-  font-size:13px;
-}
-
-.cart button{
+.modalContent button{
   width:100%;
-  margin-top:6px;
+  margin-top:10px;
   padding:10px;
   border:none;
   border-radius:6px;
   font-weight:bold;
+  background:#25D366;
+  color:white;
 }
-
-.removeBtn{background:#f44336;color:white;}
-.clearBtn{background:#555;color:white;}
-.checkoutBtn{background:#25D366;color:white;}
 </style>
 </head>
 
@@ -127,37 +161,37 @@ body{
 <div id="main" class="section active">
 
 <div class="card">
-<img src="https://source.unsplash.com/600x400/?pap,chicken">
+<img src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif">
 <div class="card-body">
 <h3>Pap & Chicken</h3>
 <p class="price">R60</p>
 <div class="qty">
-<button onclick="addItem('pap_chicken','Pap & Chicken',60)">+</button>
-<button onclick="removeItem('pap_chicken')">−</button>
+<button onclick="addItem('Pap & Chicken',60)">+</button>
+<button onclick="removeItem('Pap & Chicken')">−</button>
 </div>
 </div>
 </div>
 
 <div class="card">
-<img src="https://source.unsplash.com/600x400/?grilled,chicken">
+<img src="https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif">
 <div class="card-body">
 <h3>Grilled Chicken</h3>
 <p class="price">R50</p>
 <div class="qty">
-<button onclick="addItem('grilled_chicken','Grilled Chicken',50)">+</button>
-<button onclick="removeItem('grilled_chicken')">−</button>
+<button onclick="addItem('Grilled Chicken',50)">+</button>
+<button onclick="removeItem('Grilled Chicken')">−</button>
 </div>
 </div>
 </div>
 
 <div class="card">
-<img src="https://source.unsplash.com/600x400/?chicken,wings">
+<img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
 <div class="card-body">
 <h3>Wings + Chips + Salad</h3>
 <p class="price">R65</p>
 <div class="qty">
-<button onclick="addItem('wings_meal','Wings Meal',65)">+</button>
-<button onclick="removeItem('wings_meal')">−</button>
+<button onclick="addItem('Wings Meal',65)">+</button>
+<button onclick="removeItem('Wings Meal')">−</button>
 </div>
 </div>
 </div>
@@ -168,37 +202,37 @@ body{
 <div id="kota" class="section">
 
 <div class="card">
-<img src="https://source.unsplash.com/600x400/?kota,bread">
+<img src="https://media.giphy.com/media/26BRrSvJUa0crqw4E/giphy.gif">
 <div class="card-body">
 <h3>Kota R15</h3>
 <p class="price">Basic</p>
 <div class="qty">
-<button onclick="addItem('kota_15','Kota R15',15)">+</button>
-<button onclick="removeItem('kota_15')">−</button>
+<button onclick="addItem('Kota R15',15)">+</button>
+<button onclick="removeItem('Kota R15')">−</button>
 </div>
 </div>
 </div>
 
 <div class="card">
-<img src="https://source.unsplash.com/600x400/?kota,fries">
+<img src="https://media.giphy.com/media/3ohs4BSacFKI7A717y/giphy.gif">
 <div class="card-body">
 <h3>Kota R20</h3>
 <p class="price">Chips + Polony</p>
 <div class="qty">
-<button onclick="addItem('kota_20','Kota R20',20)">+</button>
-<button onclick="removeItem('kota_20')">−</button>
+<button onclick="addItem('Kota R20',20)">+</button>
+<button onclick="removeItem('Kota R20')">−</button>
 </div>
 </div>
 </div>
 
 <div class="card">
-<img src="https://source.unsplash.com/600x400/?kota,egg">
+<img src="https://media.giphy.com/media/l1J9urAfGd3grKV6E/giphy.gif">
 <div class="card-body">
 <h3>Kota R30</h3>
 <p class="price">Egg + Cheese + Russian</p>
 <div class="qty">
-<button onclick="addItem('kota_30','Kota R30',30)">+</button>
-<button onclick="removeItem('kota_30')">−</button>
+<button onclick="addItem('Kota R30',30)">+</button>
+<button onclick="removeItem('Kota R30')">−</button>
 </div>
 </div>
 </div>
@@ -209,25 +243,25 @@ body{
 <div id="trad" class="section">
 
 <div class="card">
-<img src="https://source.unsplash.com/600x400/?tripe,stew">
+<img src="https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif">
 <div class="card-body">
 <h3>Mogodu Meal</h3>
 <p class="price">R60</p>
 <div class="qty">
-<button onclick="addItem('mogodu','Mogodu Meal',60)">+</button>
-<button onclick="removeItem('mogodu')">−</button>
+<button onclick="addItem('Mogodu Meal',60)">+</button>
+<button onclick="removeItem('Mogodu Meal')">−</button>
 </div>
 </div>
 </div>
 
 <div class="card">
-<img src="https://source.unsplash.com/600x400/?beef,stew">
+<img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif">
 <div class="card-body">
 <h3>Beef Stew</h3>
 <p class="price">R60</p>
 <div class="qty">
-<button onclick="addItem('beef_stew','Beef Stew',60)">+</button>
-<button onclick="removeItem('beef_stew')">−</button>
+<button onclick="addItem('Beef Stew',60)">+</button>
+<button onclick="removeItem('Beef Stew')">−</button>
 </div>
 </div>
 </div>
@@ -236,108 +270,103 @@ body{
 
 </div>
 
-<!-- CART -->
-<div class="cart">
-<p id="cartText">Cart Empty</p>
+<!-- FLOATING CART BAR -->
+<div class="cartBar">
+<span id="cartSummary">Cart: 0 items</span>
+<button onclick="openCart()">Checkout</button>
+</div>
 
-<button class="removeBtn" onclick="removeLast()">Remove Last</button>
-<button class="clearBtn" onclick="clearCart()">Clear Cart</button>
-<button class="checkoutBtn" onclick="checkout()">Checkout WhatsApp</button>
+<!-- CHECKOUT MODAL -->
+<div class="modal" id="modal">
+<div class="modalContent">
+<h3>Your Order</h3>
+<pre id="cartText">Cart Empty</pre>
+<button onclick="checkout()">Send to WhatsApp</button>
+</div>
 </div>
 
 <script>
 
-let cart = {};
-let delivery = 15;
+let cart = [];
 
 function show(tab){
   document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
   document.getElementById(tab).classList.add("active");
 }
 
-function addItem(id, name, price){
-  if(!cart[id]){
-    cart[id] = {name, price, qty:0};
+function addItem(name, price){
+  let item = cart.find(i=>i.name===name);
+  if(item) item.qty++;
+  else cart.push({name, price, qty:1});
+  update();
+}
+
+function removeItem(name){
+  let item = cart.find(i=>i.name===name);
+  if(!item) return;
+
+  item.qty--;
+  if(item.qty<=0){
+    cart = cart.filter(i=>i.name!==name);
   }
-  cart[id].qty++;
-  update();
-}
-
-function removeItem(id){
-  if(!cart[id]) return;
-
-  cart[id].qty--;
-
-  if(cart[id].qty <= 0){
-    delete cart[id];
-  }
-
-  update();
-}
-
-function removeLast(){
-  let keys = Object.keys(cart);
-  if(keys.length === 0) return;
-  delete cart[keys[keys.length-1]];
-  update();
-}
-
-function clearCart(){
-  cart = {};
   update();
 }
 
 function update(){
 
-  let text = "";
-  let total = 0;
+  let totalItems = cart.reduce((a,b)=>a+b.qty,0);
+  document.getElementById("cartSummary").innerText = `Cart: ${totalItems} items`;
 
-  if(Object.keys(cart).length === 0){
+  if(cart.length===0){
     document.getElementById("cartText").innerText = "Cart Empty";
     return;
   }
 
-  for(let i in cart){
-    let item = cart[i];
-    let t = item.qty * item.price;
+  let text="";
+  let total=0;
 
-    text += `${item.name} x${item.qty} - R${t}\n`;
-    total += t;
-  }
+  cart.forEach(i=>{
+    let t=i.qty*i.price;
+    text+=`${i.name} x${i.qty} - R${t}\n`;
+    total+=t;
+  });
 
-  text += `\nSubtotal: R${total}`;
-  text += `\nDelivery: R${delivery}`;
-  text += `\nTOTAL: R${total + delivery}`;
+  text+=`\nTOTAL: R${total+15}`;
+  document.getElementById("cartText").innerText=text;
+}
 
-  document.getElementById("cartText").innerText = text;
+function openCart(){
+  document.getElementById("modal").style.display="flex";
 }
 
 function checkout(){
 
-  if(Object.keys(cart).length === 0){
+  if(cart.length===0){
     alert("Cart Empty");
     return;
   }
 
-  let total = 0;
-  let msg = "🍔 KASI EATS ORDER\n\n";
+  let msg="🍔 KASI EATS ORDER\n\n";
+  let total=0;
 
-  for(let i in cart){
-    let item = cart[i];
-    let t = item.qty * item.price;
+  cart.forEach(i=>{
+    let t=i.qty*i.price;
+    msg+=`- ${i.name} x${i.qty} (R${t})\n`;
+    total+=t;
+  });
 
-    msg += `- ${item.name} x${item.qty} (R${t})\n`;
-    total += t;
-  }
-
-  msg += `\nSubtotal: R${total}`;
-  msg += `\nDelivery: R${delivery}`;
-  msg += `\nTOTAL: R${total + delivery}`;
+  msg+=`\nTOTAL: R${total+15}`;
 
   window.open(
-    "https://wa.me/27774950915?text=" + encodeURIComponent(msg),
+    "https://wa.me/27774950915?text="+encodeURIComponent(msg),
     "_blank"
   );
+}
+
+window.onclick=function(e){
+  if(e.target.id==="modal"){
+    document.getElementById("modal").style.display="none";
+  }
 }
 
 </script>
