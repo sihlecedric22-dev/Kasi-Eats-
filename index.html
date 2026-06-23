@@ -121,26 +121,13 @@ body{
   cursor:pointer;
 }
 
-/* LOCATION INPUT */
+/* LOCATION */
 #locationInput{
   width:100%;
   padding:10px;
   margin-top:10px;
   border-radius:8px;
   border:none;
-}
-
-/* GPS BUTTON */
-.gpsBtn{
-  width:100%;
-  padding:10px;
-  margin-top:8px;
-  border:none;
-  border-radius:8px;
-  background:#2196f3;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
 }
 </style>
 </head>
@@ -164,13 +151,7 @@ body{
 
 <h3>Total: R<span id="cartTotal">0</span></h3>
 
-<!-- LOCATION -->
 <input id="locationInput" placeholder="Enter your location (e.g. Soshanguve Block H)">
-
-<!-- GPS BUTTON -->
-<button class="gpsBtn" onclick="getGPSLocation()">
-📍 Use My GPS Location
-</button>
 
 <button class="checkout" onclick="checkoutWhatsApp()">
 Checkout on WhatsApp
@@ -247,10 +228,10 @@ function renderCategory(title, items){
 
 function renderMenu(){
   document.getElementById("kota").innerHTML =
-    renderCategory("Kota", menu.kota) +
-    renderCategory("Main Meals", menu.main) +
-    renderCategory("Chips", menu.chips) +
-    renderCategory("Traditional Meals", menu.traditional);
+    renderCategory("Kota 🍞", menu.kota) +
+    renderCategory("Main Meals 🍗", menu.main) +
+    renderCategory("Chips 🍟", menu.chips) +
+    renderCategory("Traditional Meals 🍲", menu.traditional);
 }
 
 function addItem(name, price){
@@ -291,47 +272,32 @@ function goBackToMenu(){
   document.getElementById("kota").scrollIntoView({behavior:"smooth"});
 }
 
-/* ✅ GPS LOCATION */
-function getGPSLocation(){
-  if(!navigator.geolocation){
-    alert("GPS not supported on this device");
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(
-    function(position){
-      let lat = position.coords.latitude;
-      let lng = position.coords.longitude;
-
-      let link = "https://maps.google.com/?q=" + lat + "," + lng;
-
-      document.getElementById("locationInput").value = link;
-
-      alert("Location captured successfully!");
-    },
-    function(){
-      alert("Unable to get location. Please enable GPS.");
-    }
-  );
-}
-
+/* ✅ UPDATED CHECKOUT FORMAT */
 function checkoutWhatsApp(){
 
   let orderID = generateOrderID();
   let location = document.getElementById("locationInput").value;
 
-  let msg = "🔥 Kasi Eats Order:%0A";
-  msg += "🧾 Order ID: " + orderID + "%0A%0A";
+  let msg = "🔥 *INTO EMNANDI CATERING ORDER* 🔥%0A%0A";
 
-  let total = 0;
+  msg += "🧾 Order ID: " + orderID + "%0A";
+  msg += "👤 Customer: Sihle%0A%0A";
+
+  msg += "🍽 ITEMS:%0A";
 
   for(let k in cart){
-    msg += k + " x" + cart[k].qty + "%0A";
+    msg += "• " + k + " x" + cart[k].qty + " (R" + (cart[k].price * cart[k].qty) + ")%0A";
+  }
+
+  msg += "%0A📍 Address:%0A";
+  msg += (location ? location : "Not provided") + "%0A%0A";
+
+  let total = 0;
+  for(let k in cart){
     total += cart[k].price * cart[k].qty;
   }
 
-  msg += "%0A💰 Total: R" + total + "%0A";
-  msg += "%0A📍 Location: " + (location ? location : "Not provided") + "%0A";
+  msg += "💰 Total: R" + total + "%0A";
 
   let phone = "27774950915";
 
