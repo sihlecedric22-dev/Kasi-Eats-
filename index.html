@@ -21,6 +21,7 @@ body{
   font-weight:bold;
 }
 
+/* CATEGORY TITLE */
 .category{
   margin-top:20px;
   padding:10px;
@@ -30,12 +31,14 @@ body{
   border-bottom:2px solid #ff9800;
 }
 
+/* MENU */
 #kota{
   min-height:100vh;
   padding:15px;
   background:#111;
 }
 
+/* CARD */
 .card{
   background:rgba(255,255,255,0.05);
   border:1px solid rgba(255,255,255,0.2);
@@ -64,6 +67,7 @@ body{
   color:white;
 }
 
+/* CART BUTTON */
 #cartBtn{
   position:fixed;
   bottom:20px;
@@ -77,6 +81,7 @@ body{
   z-index:1000;
 }
 
+/* CART PANEL */
 #cartPanel{
   position:fixed;
   right:-350px;
@@ -90,7 +95,9 @@ body{
   z-index:1000;
 }
 
-#cartPanel.open{right:0;}
+#cartPanel.open{
+  right:0;
+}
 
 .checkout{
   background:#25D366;
@@ -100,9 +107,9 @@ body{
   padding:12px;
   margin-top:10px;
   border-radius:10px;
-  cursor:pointer;
 }
 
+/* BACK BUTTON */
 .backBtn{
   background:#444;
   color:white;
@@ -114,7 +121,8 @@ body{
   cursor:pointer;
 }
 
-#locationInput,#customerName{
+/* LOCATION */
+#locationInput{
   width:100%;
   padding:10px;
   margin-top:10px;
@@ -122,6 +130,16 @@ body{
   border:none;
 }
 
+/* CUSTOMER INPUT */
+#customerName{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border-radius:8px;
+  border:none;
+}
+
+/* GPS BUTTON */
 .gpsBtn{
   width:100%;
   padding:10px;
@@ -147,23 +165,31 @@ body{
 <div id="cartPanel">
 <h2>Your Order</h2>
 
-<button class="backBtn" onclick="goBackToMenu()">⬅ Back to Menu</button>
+<button class="backBtn" onclick="goBackToMenu()">
+⬅ Back to Menu
+</button>
 
 <div id="cartItems"></div>
 
 <h3>Total: R<span id="cartTotal">0</span></h3>
 
+<!-- CUSTOMER NAME -->
 <input id="customerName" placeholder="Enter customer name">
-<input id="locationInput" placeholder="Enter your location">
 
-<button class="gpsBtn" onclick="getGPSLocation()">📍 Use My GPS Location</button>
+<!-- LOCATION -->
+<input id="locationInput" placeholder="Enter your location (e.g. Soshanguve Block H)">
+
+<!-- GPS -->
+<button class="gpsBtn" onclick="getGPSLocation()">
+📍 Use My GPS Location
+</button>
 
 <button class="checkout" onclick="checkoutWhatsApp()">
 Checkout on WhatsApp
 </button>
-
 </div>
 
+<!-- MENU -->
 <div id="kota"></div>
 
 <script>
@@ -174,6 +200,7 @@ function generateOrderID(){
 
 let cart = {};
 
+/* MENU */
 let menu = {
   kota: [
     {name:"R15 Kota", price:15, desc:"Chips + Archaar + Polony"},
@@ -181,12 +208,37 @@ let menu = {
     {name:"R30 Kota", price:30, desc:"+ Vienna + Egg + Cheese"},
     {name:"R35 Kota", price:35, desc:"+ Vienna + Egg + Russian + Cheese + Burger"},
     {name:"R40 Kota", price:40, desc:"Full Vienna + Egg + Russian + Cheese + Half Burger"},
-    {name:"R50 Kota", price:50, desc:"Full Combo Kota"}
+    {name:"R50 Kota", price:50, desc:"Full Combo Kota"},
+    {name:"R60 Kota", price:60, desc:"Loaded Kota"},
+    {name:"R80 Kota (Deluxe)", price:80, desc:"Deluxe Kota + Drink"},
+    {name:"R100 Kota (Ultimate)", price:100, desc:"Ultimate Kota + Wings + Drink"}
+  ],
+
+  main: [
+    {name:"Wings + Chips", price:45, desc:"Crispy wings with chips"},
+    {name:"Wings + Chips + Salad", price:50, desc:"Wings, chips and salad"},
+    {name:"Chicken Wrap + Chips + Wings", price:65, desc:"Full wrap combo"},
+    {name:"Pap or Creamy Samp or Dombolo + Quarter Chicken + Side", price:60, desc:"Traditional combo meal"}
+  ],
+
+  chips: [
+    {name:"Chips (Small)", price:15, desc:"Small chips"},
+    {name:"Chips (Medium)", price:25, desc:"Medium chips"},
+    {name:"Chips (Large)", price:35, desc:"Large chips"}
+  ],
+
+  traditional: [
+    {name:"Pap or Creamy Samp or Dombolo + Mogodu + 2 Sides", price:60, desc:"Hearty traditional meal"},
+    {name:"Pap or Creamy Samp or Dombolo + Chicken + 2 Sides", price:60, desc:"Chicken traditional meal"},
+    {name:"Pap or Creamy Samp or Dombolo + Beef Stew + 2 Sides", price:60, desc:"Beef traditional meal"},
+    {name:"Pap or Creamy Samp or Dombolo + Wors + 2 Sides", price:60, desc:"Wors traditional meal"},
+    {name:"Pap or Creamy Samp or Dombolo + Meatballs + 2 Sides", price:60, desc:"Meatballs traditional meal"}
   ]
 };
 
 function renderCategory(title, items){
   let html = `<div class="category">🍽 ${title}</div>`;
+
   items.forEach(item=>{
     html += `
       <div class="card">
@@ -201,12 +253,16 @@ function renderCategory(title, items){
       </div>
     `;
   });
+
   return html;
 }
 
 function renderMenu(){
   document.getElementById("kota").innerHTML =
-    renderCategory("Kota 🍞", menu.kota);
+    renderCategory("Kota 🍞", menu.kota) +
+    renderCategory("Main Meals 🍗", menu.main) +
+    renderCategory("Chips 🍟", menu.chips) +
+    renderCategory("Traditional Meals 🍲", menu.traditional);
 }
 
 function addItem(name, price){
@@ -218,7 +274,7 @@ function addItem(name, price){
 function removeItem(name){
   if(cart[name]){
     cart[name].qty--;
-    if(cart[name].qty <= 0) delete cart[name];
+    if(cart[name].qty<=0) delete cart[name];
   }
   updateCart();
 }
@@ -229,13 +285,13 @@ function updateCart(){
   box.innerHTML="";
 
   for(let k in cart){
-    total += cart[k].price * cart[k].qty;
-    count += cart[k].qty;
-    box.innerHTML += `<p>${k} x${cart[k].qty} - R${cart[k].price * cart[k].qty}</p>`;
+    total+=cart[k].price*cart[k].qty;
+    count+=cart[k].qty;
+    box.innerHTML+=`<p>${k} x${cart[k].qty} - R${cart[k].price*cart[k].qty}</p>`;
   }
 
-  document.getElementById("cartTotal").innerText = total;
-  document.getElementById("cartCount").innerText = count;
+  document.getElementById("cartTotal").innerText=total;
+  document.getElementById("cartCount").innerText=count;
 }
 
 function toggleCart(){
@@ -247,40 +303,60 @@ function goBackToMenu(){
   document.getElementById("kota").scrollIntoView({behavior:"smooth"});
 }
 
+/* GPS */
 function getGPSLocation(){
-  navigator.geolocation.getCurrentPosition(pos=>{
-    let link = "https://maps.google.com/?q=" + pos.coords.latitude + "," + pos.coords.longitude;
-    document.getElementById("locationInput").value = link;
-  }, ()=>alert("Enable GPS"));
-}
-
-function checkoutWhatsApp(){
-
-  if(Object.keys(cart).length === 0){
-    alert("Cart is empty!");
+  if(!navigator.geolocation){
+    alert("GPS not supported on this device");
     return;
   }
 
+  navigator.geolocation.getCurrentPosition(
+    function(position){
+      let lat = position.coords.latitude;
+      let lng = position.coords.longitude;
+      let link = "https://maps.google.com/?q=" + lat + "," + lng;
+
+      document.getElementById("locationInput").value = link;
+      alert("Location captured successfully!");
+    },
+    function(){
+      alert("Unable to get location. Please enable GPS.");
+    }
+  );
+}
+
+/* CHECKOUT */
+function checkoutWhatsApp(){
+
   let orderID = generateOrderID();
-  let customer = document.getElementById("customerName").value || "Walk-in Customer";
-  let location = document.getElementById("locationInput").value || "Not provided";
+  let location = document.getElementById("locationInput").value;
+  let customer = document.getElementById("customerName").value;
 
   let msg = "🔥 INTO EMNANDI CATERING ORDER 🔥\n\n";
+
   msg += "🧾 Order ID: " + orderID + "\n";
-  msg += "👤 Customer: " + customer + "\n\n";
+  msg += "👤 Customer: " + (customer ? customer : "Walk-in Customer") + "\n\n";
+
   msg += "🍽 ITEMS:\n";
 
   let total = 0;
 
   for(let k in cart){
-    msg += "• " + k + " x" + cart[k].qty + " (R" + cart[k].price * cart[k].qty + ")\n";
+    msg += "• " + k + " x" + cart[k].qty + " (R" + (cart[k].price * cart[k].qty) + ")\n";
     total += cart[k].price * cart[k].qty;
   }
 
-  msg += "\n📍 Address:\n" + location + "\n";
-  msg += "\n💰 Total: R" + total + "\n";
+  msg += "\n📍 Address:\n";
+  msg += (location ? location : "Not provided") + "\n\n";
 
-  window.open("https://wa.me/27774950915?text=" + encodeURIComponent(msg), "_blank");
+  msg += "💰 Total: R" + total + "\n";
+
+  let phone = "27774950915";
+
+  window.open(
+    "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg),
+    "_blank"
+  );
 
   cart = {};
   updateCart();
