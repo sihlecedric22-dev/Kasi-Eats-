@@ -21,15 +21,14 @@ body{
   font-weight:bold;
 }
 
-/* CATEGORY HEADER */
+/* CATEGORY TITLE */
 .category{
-  margin-top:18px;
+  margin-top:20px;
   padding:10px;
   font-size:18px;
   font-weight:bold;
   color:#ff9800;
-  border-left:4px solid #ff9800;
-  padding-left:10px;
+  border-bottom:2px solid #ff9800;
 }
 
 /* MENU */
@@ -137,7 +136,7 @@ body{
   text-align:center;
 }
 
-/* LOCATION INPUT */
+/* LOCATION */
 #locationInput{
   width:100%;
   padding:10px;
@@ -167,7 +166,6 @@ body{
 
 <h3>Total: R<span id="cartTotal">0</span></h3>
 
-<!-- LOCATION (ONLY FOR CHECKOUT) -->
 <input id="locationInput" placeholder="Enter your location (e.g. Soshanguve Block H)">
 
 <button class="checkout" onclick="checkoutWhatsApp()">
@@ -175,6 +173,7 @@ Checkout on WhatsApp
 </button>
 </div>
 
+<!-- MENU -->
 <div id="kota"></div>
 
 <div id="successScreen">
@@ -203,53 +202,47 @@ function generateOrderID(){
 
 let cart = {};
 
-/* ✅ MENU */
-let menu = [
-  /* 🍞 KOTA */
-  {cat:"Kota", name:"R15 Kota", price:15, desc:"Chips + Archaar + Polony"},
-  {cat:"Kota", name:"R20 Kota", price:20, desc:"+ Vienna"},
-  {cat:"Kota", name:"R30 Kota", price:30, desc:"+ Vienna + Egg + Cheese"},
-  {cat:"Kota", name:"R35 Kota", price:35, desc:"+ Vienna + Egg + Russian + Cheese + Burger"},
-  {cat:"Kota", name:"R40 Kota", price:40, desc:"Full Vienna + Egg + Russian + Cheese + Half Burger"},
-  {cat:"Kota", name:"R50 Kota", price:50, desc:"Full Combo Kota"},
-  {cat:"Kota", name:"R60 Kota", price:60, desc:"Loaded Kota"},
-  {cat:"Kota", name:"R80 Kota (Deluxe)", price:80, desc:"Deluxe Kota + Drink"},
-  {cat:"Kota", name:"R100 Kota (Ultimate)", price:100, desc:"Ultimate Kota + Wings + Drink"},
+/* ✅ MENU (UNCHANGED ITEMS, ONLY STRUCTURE FIXED) */
+let menu = {
+  kota: [
+    {name:"R15 Kota", price:15, desc:"Chips + Archaar + Polony"},
+    {name:"R20 Kota", price:20, desc:"+ Vienna"},
+    {name:"R30 Kota", price:30, desc:"+ Vienna + Egg + Cheese"},
+    {name:"R35 Kota", price:35, desc:"+ Vienna + Egg + Russian + Cheese + Burger"},
+    {name:"R40 Kota", price:40, desc:"Full Vienna + Egg + Russian + Cheese + Half Burger"},
+    {name:"R50 Kota", price:50, desc:"Full Combo Kota"},
+    {name:"R60 Kota", price:60, desc:"Loaded Kota"},
+    {name:"R80 Kota (Deluxe)", price:80, desc:"Deluxe Kota + Drink"},
+    {name:"R100 Kota (Ultimate)", price:100, desc:"Ultimate Kota + Wings + Drink"}
+  ],
 
-  /* 🍗 MAIN MEALS */
-  {cat:"Main Meals", name:"Wings + Chips", price:45, desc:"Crispy wings with chips"},
-  {cat:"Main Meals", name:"Wings + Chips + Salad", price:50, desc:"Wings, chips and salad"},
-  {cat:"Main Meals", name:"Chicken Wrap + Chips + Wings", price:65, desc:"Full wrap combo"},
-  {cat:"Main Meals", name:"Pap or Creamy Samp or Dombolo + Quarter Chicken + Side", price:60, desc:"Traditional combo meal"},
+  main: [
+    {name:"Wings + Chips", price:45, desc:"Crispy wings with chips"},
+    {name:"Wings + Chips + Salad", price:50, desc:"Wings, chips and salad"},
+    {name:"Chicken Wrap + Chips + Wings", price:65, desc:"Full wrap combo"},
+    {name:"Pap or Creamy Samp or Dombolo + Quarter Chicken + Side", price:60, desc:"Traditional combo meal"}
+  ],
 
-  /* 🍟 CHIPS */
-  {cat:"Chips", name:"Chips (Small)", price:15, desc:"Small chips"},
-  {cat:"Chips", name:"Chips (Medium)", price:25, desc:"Medium chips"},
-  {cat:"Chips", name:"Chips (Large)", price:35, desc:"Large chips"},
+  chips: [
+    {name:"Chips (Small)", price:15, desc:"Small chips"},
+    {name:"Chips (Medium)", price:25, desc:"Medium chips"},
+    {name:"Chips (Large)", price:35, desc:"Large chips"}
+  ],
 
-  /* 🍲 TRADITIONAL */
-  {cat:"Traditional Meals", name:"Pap or Creamy Samp or Dombolo + Mogodu + 2 Sides", price:60, desc:"Hearty traditional meal"},
-  {cat:"Traditional Meals", name:"Pap or Creamy Samp or Dombolo + Chicken + 2 Sides", price:60, desc:"Chicken traditional meal"},
-  {cat:"Traditional Meals", name:"Pap or Creamy Samp or Dombolo + Beef Stew + 2 Sides", price:60, desc:"Beef traditional meal"},
-  {cat:"Traditional Meals", name:"Pap or Creamy Samp or Dombolo + Wors + 2 Sides", price:60, desc:"Wors traditional meal"},
-  {cat:"Traditional Meals", name:"Pap or Creamy Samp or Dombolo + Meatballs + 2 Sides", price:60, desc:"Meatballs traditional meal"}
-];
+  traditional: [
+    {name:"Pap or Creamy Samp or Dombolo + Mogodu + 2 Sides", price:60, desc:"Hearty traditional meal"},
+    {name:"Pap or Creamy Samp or Dombolo + Chicken + 2 Sides", price:60, desc:"Chicken traditional meal"},
+    {name:"Pap or Creamy Samp or Dombolo + Beef Stew + 2 Sides", price:60, desc:"Beef traditional meal"},
+    {name:"Pap or Creamy Samp or Dombolo + Wors + 2 Sides", price:60, desc:"Wors traditional meal"},
+    {name:"Pap or Creamy Samp or Dombolo + Meatballs + 2 Sides", price:60, desc:"Meatballs traditional meal"}
+  ]
+};
 
-function renderMenu(){
+function renderCategory(title, items){
+  let html = `<div class="category">${title}</div>`;
 
-  let box=document.getElementById("kota");
-  box.innerHTML="";
-
-  let currentCat = "";
-
-  menu.forEach(item=>{
-
-    if(item.cat !== currentCat){
-      currentCat = item.cat;
-      box.innerHTML += `<div class="category">🍽 ${currentCat}</div>`;
-    }
-
-    box.innerHTML+=`
+  items.forEach(item=>{
+    html += `
       <div class="card">
         <h3>${item.name}</h3>
         <p>${item.desc}</p>
@@ -262,6 +255,16 @@ function renderMenu(){
       </div>
     `;
   });
+
+  return html;
+}
+
+function renderMenu(){
+  document.getElementById("kota").innerHTML =
+    renderCategory("🍞 Kota", menu.kota) +
+    renderCategory("🍗 Main Meals", menu.main) +
+    renderCategory("🍟 Chips", menu.chips) +
+    renderCategory("🍲 Traditional Meals", menu.traditional);
 }
 
 function addItem(name, price){
@@ -309,7 +312,6 @@ function closeSuccess(){
 function checkoutWhatsApp(){
 
   let orderID = generateOrderID();
-
   let location = document.getElementById("locationInput").value;
 
   let msg = "🔥 Kasi Eats Order:%0A";
@@ -325,10 +327,8 @@ function checkoutWhatsApp(){
   msg += "%0A💰 Total: R" + total + "%0A";
   msg += "%0A📍 Location: " + (location ? location : "Not provided") + "%0A";
 
-  let phone = "27700000000";
-
   window.open(
-    "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg),
+    "https://wa.me/27700000000?text=" + encodeURIComponent(msg),
     "_blank"
   );
 
