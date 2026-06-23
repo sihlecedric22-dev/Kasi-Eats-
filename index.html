@@ -3,121 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Kasi Eats</title>
 
 <style>
-body{
-  margin:0;
-  font-family:Arial;
-  background:#0f0f0f;
-  color:white;
-}
-
-.header{
-  background:#ff9800;
-  padding:16px;
-  text-align:center;
-  font-size:24px;
-  font-weight:bold;
-  position:sticky;
-  top:0;
-}
-
-.tabs{
-  display:flex;
-  justify-content:space-around;
-  background:#1a1a1a;
-  padding:10px 0;
-  position:sticky;
-  top:55px;
-}
-
-.tabs button{
-  background:none;
-  border:none;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.container{
-  padding:12px;
-  padding-bottom:300px;
-}
-
-.section{ display:none; }
-.active{ display:block; }
-
-.card{
-  background:white;
-  color:black;
-  border-radius:12px;
-  overflow:hidden;
-  margin-bottom:12px;
-}
-
-.card img{
-  width:100%;
-  height:140px;
-  object-fit:cover;
-}
-
-.card-body{
-  padding:10px;
-}
-
-.price{
-  font-weight:bold;
-  margin:5px 0;
-}
-
-.qty-box{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:8px;
-}
-
-.qty-box button{
-  width:35px;
-  height:35px;
-  border:none;
-  background:#25D366;
-  color:white;
-  font-size:18px;
-  border-radius:6px;
-}
-
-.cart{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:white;
-  color:black;
-  padding:12px;
-}
-
-#cartText{
-  white-space:pre-line;
-  font-size:14px;
-}
-
-.cart button{
-  width:100%;
-  margin-top:6px;
-  padding:10px;
-  border:none;
-  border-radius:6px;
-  font-weight:bold;
-}
-
-.removeBtn{ background:#f44336; color:white; }
-.clearBtn{ background:#555; color:white; }
-.checkoutBtn{ background:#25D366; color:white; }
+body{margin:0;font-family:Arial;background:#0f0f0f;color:white;}
+.header{background:#ff9800;padding:16px;text-align:center;font-size:24px;font-weight:bold;position:sticky;top:0;}
+.tabs{display:flex;justify-content:space-around;background:#1c1c1c;padding:10px;position:sticky;top:56px;}
+.tabs button{background:none;border:none;color:white;font-weight:bold;}
+.container{padding:12px;padding-bottom:320px;}
+.section{display:none;}
+.active{display:block;}
+.card{background:white;color:black;border-radius:12px;overflow:hidden;margin-bottom:12px;}
+.card img{width:100%;height:140px;object-fit:cover;}
+.card-body{padding:10px;}
+.price{font-weight:bold;}
+.qty{display:flex;justify-content:space-between;align-items:center;}
+.qty button{width:34px;height:34px;border:none;background:#25D366;color:white;font-size:18px;border-radius:6px;}
+.cart{position:fixed;bottom:0;left:0;right:0;background:white;color:black;padding:12px;}
+#cartText{white-space:pre-line;font-size:13px;}
+.cart button{width:100%;margin-top:6px;padding:10px;border:none;border-radius:6px;font-weight:bold;}
+.removeBtn{background:#f44336;color:white;}
+.clearBtn{background:#555;color:white;}
+.checkoutBtn{background:#25D366;color:white;}
 </style>
-
 </head>
 
 <body>
@@ -125,63 +33,108 @@ body{
 <div class="header">🍔 KASI EATS</div>
 
 <div class="tabs">
-<button onclick="showTab('main')">Main</button>
-<button onclick="showTab('kota')">Kota</button>
-<button onclick="showTab('trad')">Traditional</button>
+<button onclick="show('main')">Main</button>
+<button onclick="show('kota')">Kota</button>
+<button onclick="show('trad')">Traditional</button>
 </div>
 
 <div class="container">
 
-<!-- MAIN -->
+<!-- MAIN MEALS -->
 <div id="main" class="section active">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1604908177522-040a1d1c0c0c">
+<img src="https://source.unsplash.com/600x400/?pap,maize,stew,african-food">
 <div class="card-body">
-<h3>Pap & Chicken</h3>
+<h3>Pap & Creamy Chicken</h3>
 <p class="price">R60</p>
-
-<div class="qty-box">
-<button onclick="changeQty('Pap & Chicken',60,-1)">−</button>
-<span id="q-Pap & Chicken">0</span>
-<button onclick="changeQty('Pap & Chicken',60,1)">+</button>
-</div>
-
+<div class="qty"><button onclick="qty('Pap & Chicken',60,-1)">−</button><span id="q-Pap & Chicken">0</span><button onclick="qty('Pap & Chicken',60,1)">+</button></div>
 </div>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086">
+<img src="https://source.unsplash.com/600x400/?grilled,chicken,braai,bbq">
 <div class="card-body">
 <h3>Grilled Chicken</h3>
 <p class="price">R50</p>
-
-<div class="qty-box">
-<button onclick="changeQty('Grilled Chicken',50,-1)">−</button>
-<span id="q-Grilled Chicken">0</span>
-<button onclick="changeQty('Grilled Chicken',50,1)">+</button>
-</div>
-
+<div class="qty"><button onclick="qty('Grilled Chicken',50,-1)">−</button><span id="q-Grilled Chicken">0</span><button onclick="qty('Grilled Chicken',50,1)">+</button></div>
 </div>
 </div>
 
+<div class="card">
+<img src="https://source.unsplash.com/600x400/?wings,fries,chicken">
+<div class="card-body">
+<h3>Wings + Chips + Salad</h3>
+<p class="price">R65</p>
+<div class="qty"><button onclick="qty('Wings Meal',65,-1)">−</button><span id="q-Wings Meal">0</span><button onclick="qty('Wings Meal',65,1)">+</button></div>
+</div>
 </div>
 
-<!-- KOTA -->
+<div class="card">
+<img src="https://source.unsplash.com/600x400/?chicken,wrap,fast-food">
+<div class="card-body">
+<h3>Chicken Wrap Combo</h3>
+<p class="price">R45</p>
+<div class="qty"><button onclick="qty('Chicken Wrap',45,-1)">−</button><span id="q-Chicken Wrap">0</span><button onclick="qty('Chicken Wrap',45,1)">+</button></div>
+</div>
+</div>
+
+</div>
+
+<!-- KOTA FULL RANGE -->
 <div id="kota" class="section">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1619535860434-cf1c8a1c0c0c">
+<img src="https://source.unsplash.com/600x400/?kota,bread,street-food">
 <div class="card-body">
-<h3>Kota R20</h3>
-<p class="price">Quarter bread filled with chips, egg & sausage</p>
-
-<div class="qty-box">
-<button onclick="changeQty('Kota R20',20,-1)">−</button>
-<span id="q-Kota R20">0</span>
-<button onclick="changeQty('Kota R20',20,1)">+</button>
+<h3>Kota R15</h3>
+<p class="price">Basic Kota</p>
+<div class="qty"><button onclick="qty('Kota R15',15,-1)">−</button><span id="q-Kota R15">0</span><button onclick="qty('Kota R15',15,1)">+</button></div>
+</div>
 </div>
 
+<div class="card">
+<img src="https://source.unsplash.com/600x400/?kota,fries,sausage">
+<div class="card-body">
+<h3>Kota R20</h3>
+<p class="price">Chips + Polony + Vienna</p>
+<div class="qty"><button onclick="qty('Kota R20',20,-1)">−</button><span id="q-Kota R20">0</span><button onclick="qty('Kota R20',20,1)">+</button></div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://source.unsplash.com/600x400/?kota,egg,cheese,fries">
+<div class="card-body">
+<h3>Kota R25</h3>
+<p class="price">Egg + Chips + Vienna</p>
+<div class="qty"><button onclick="qty('Kota R25',25,-1)">−</button><span id="q-Kota R25">0</span><button onclick="qty('Kota R25',25,1)">+</button></div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://source.unsplash.com/600x400/?loaded-fries,sandwich">
+<div class="card-body">
+<h3>Kota R30</h3>
+<p class="price">Egg + Cheese + Russian</p>
+<div class="qty"><button onclick="qty('Kota R30',30,-1)">−</button><span id="q-Kota R30">0</span><button onclick="qty('Kota R30',30,1)">+</button></div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://source.unsplash.com/600x400/?kota,burger,fries">
+<div class="card-body">
+<h3>Kota R40</h3>
+<p class="price">Full Combo</p>
+<div class="qty"><button onclick="qty('Kota R40',40,-1)">−</button><span id="q-Kota R40">0</span><button onclick="qty('Kota R40',40,1)">+</button></div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://source.unsplash.com/600x400/?kota,loaded-sandwich">
+<div class="card-body">
+<h3>Kota R50</h3>
+<p class="price">Double Meat Combo</p>
+<div class="qty"><button onclick="qty('Kota R50',50,-1)">−</button><span id="q-Kota R50">0</span><button onclick="qty('Kota R50',50,1)">+</button></div>
 </div>
 </div>
 
@@ -191,17 +144,38 @@ body{
 <div id="trad" class="section">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1615937657715-bc7b4b7962c3">
+<img src="https://source.unsplash.com/600x400/?tripe,stew,african-food">
 <div class="card-body">
 <h3>Mogodu Meal</h3>
 <p class="price">R60</p>
-
-<div class="qty-box">
-<button onclick="changeQty('Mogodu Meal',60,-1)">−</button>
-<span id="q-Mogodu Meal">0</span>
-<button onclick="changeQty('Mogodu Meal',60,1)">+</button>
+<div class="qty"><button onclick="qty('Mogodu Meal',60,-1)">−</button><span id="q-Mogodu Meal">0</span><button onclick="qty('Mogodu Meal',60,1)">+</button></div>
+</div>
 </div>
 
+<div class="card">
+<img src="https://source.unsplash.com/600x400/?beef,stew,african-food">
+<div class="card-body">
+<h3>Beef Stew Meal</h3>
+<p class="price">R60</p>
+<div class="qty"><button onclick="qty('Beef Stew Meal',60,-1)">−</button><span id="q-Beef Stew Meal">0</span><button onclick="qty('Beef Stew Meal',60,1)">+</button></div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://source.unsplash.com/600x400/?wors,sausage,braai">
+<div class="card-body">
+<h3>Wors Meal</h3>
+<p class="price">R60</p>
+<div class="qty"><button onclick="qty('Wors Meal',60,-1)">−</button><span id="q-Wors Meal">0</span><button onclick="qty('Wors Meal',60,1)">+</button></div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://source.unsplash.com/600x400/?meatballs,stew">
+<div class="card-body">
+<h3>Meatballs Meal</h3>
+<p class="price">R60</p>
+<div class="qty"><button onclick="qty('Meatballs Meal',60,-1)">−</button><span id="q-Meatballs Meal">0</span><button onclick="qty('Meatballs Meal',60,1)">+</button></div>
 </div>
 </div>
 
@@ -211,38 +185,29 @@ body{
 
 <!-- CART -->
 <div class="cart">
-
 <p id="cartText">Cart Empty</p>
-
 <button class="removeBtn" onclick="removeLast()">Remove Last</button>
 <button class="clearBtn" onclick="clearCart()">Clear Cart</button>
 <button class="checkoutBtn" onclick="checkout()">Checkout WhatsApp</button>
-
 </div>
 
 <script>
 
 let cart = {};
-let deliveryFee = 15;
+let delivery = 15;
 
-function showTab(tab){
+function show(tab){
   document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
   document.getElementById(tab).classList.add("active");
 }
 
-function changeQty(name, price, change){
+function qty(name, price, change){
 
-  if(!cart[name]){
-    cart[name] = {qty:0, price:price};
-  }
+  if(!cart[name]) cart[name] = {qty:0, price};
 
   cart[name].qty += change;
 
-  if(cart[name].qty < 0) cart[name].qty = 0;
-
-  if(cart[name].qty === 0){
-    delete cart[name];
-  }
+  if(cart[name].qty <= 0) delete cart[name];
 
   let el = document.getElementById("q-"+name);
   if(el) el.innerText = cart[name] ? cart[name].qty : 0;
@@ -260,15 +225,15 @@ function update(){
     return;
   }
 
-  for(let item in cart){
-    let line = cart[item].qty * cart[item].price;
-    text += `${item} x${cart[item].qty} - R${line}\n`;
-    total += line;
+  for(let i in cart){
+    let t = cart[i].qty * cart[i].price;
+    text += `${i} x${cart[i].qty} - R${t}\n`;
+    total += t;
   }
 
   text += `\nSubtotal: R${total}`;
-  text += `\nDelivery: R${deliveryFee}`;
-  text += `\nTOTAL: R${total + deliveryFee}`;
+  text += `\nDelivery: R${delivery}`;
+  text += `\nTOTAL: R${total + delivery}`;
 
   document.getElementById("cartText").innerText = text;
 }
@@ -276,7 +241,7 @@ function update(){
 function removeLast(){
   let keys = Object.keys(cart);
   if(keys.length === 0) return;
-  delete cart[keys[keys.length - 1]];
+  delete cart[keys[keys.length-1]];
   update();
 }
 
@@ -297,19 +262,18 @@ function checkout(){
   }
 
   let total = 0;
-
   let msg = "🍔 KASI EATS ORDER\n\n";
   msg += "Order ID: " + orderID() + "\n\n";
 
-  for(let item in cart){
-    let line = cart[item].qty * cart[item].price;
-    msg += "- " + item + " x" + cart[item].qty + " (R" + line + ")\n";
-    total += line;
+  for(let i in cart){
+    let t = cart[i].qty * cart[i].price;
+    msg += "- " + i + " x" + cart[i].qty + " (R" + t + ")\n";
+    total += t;
   }
 
   msg += "\nSubtotal: R" + total;
-  msg += "\nDelivery: R" + deliveryFee;
-  msg += "\nTOTAL: R" + (total + deliveryFee);
+  msg += "\nDelivery: R" + delivery;
+  msg += "\nTOTAL: R" + (total + delivery);
 
   window.open(
     "https://wa.me/27774950915?text=" + encodeURIComponent(msg),
