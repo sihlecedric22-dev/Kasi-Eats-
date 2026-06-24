@@ -151,6 +151,13 @@ body{
   font-weight:bold;
   cursor:pointer;
 }
+
+/* 💳 QR PAYMENT SECTION */
+#paymentQR{
+  width:100%;
+  border-radius:12px;
+  margin-top:10px;
+}
 </style>
 </head>
 
@@ -172,6 +179,15 @@ body{
 <div id="cartItems"></div>
 
 <h3>Total: R<span id="cartTotal">0</span></h3>
+
+<!-- 💳 PAYMENT QR -->
+<h3>💳 Pay Now (Scan to Pay)</h3>
+
+<img id="paymentQR" alt="Payment QR Code">
+
+<p style="font-size:12px;opacity:0.8;">
+Scan with Capitec PayMe / banking app to pay instantly
+</p>
 
 <!-- CUSTOMER NAME -->
 <input id="customerName" placeholder="Enter customer name">
@@ -317,12 +333,23 @@ function getGPSLocation(){
       let link = "https://maps.google.com/?q=" + lat + "," + lng;
 
       document.getElementById("locationInput").value = link;
-      alert("Location captured successfully!");
     },
     function(){
       alert("Unable to get location. Please enable GPS.");
     }
   );
+}
+
+/* PAYMENT QR GENERATION */
+function generatePaymentQR() {
+  let paymentCode =
+  "00020126720028za.co.capitec.electrum.payme0136c23f35cf-8f86-4257-98cd-d675e8c893a26304C141";
+
+  let qrImage =
+  "https://api.qrserver.com/v1/create-qr-code/?size=400x400&data="
+  + encodeURIComponent(paymentCode);
+
+  document.getElementById("paymentQR").src = qrImage;
 }
 
 /* CHECKOUT */
@@ -349,7 +376,8 @@ function checkoutWhatsApp(){
   msg += "\n📍 Address:\n";
   msg += (location ? location : "Not provided") + "\n\n";
 
-  msg += "💰 Total: R" + total + "\n";
+  msg += "💰 Total: R" + total + "\n\n";
+  msg += "💳 PAYMENT: Pay via QR (Capitec PayMe)\n";
 
   let phone = "27774950915";
 
@@ -364,6 +392,7 @@ function checkoutWhatsApp(){
 }
 
 renderMenu();
+generatePaymentQR();
 
 </script>
 
